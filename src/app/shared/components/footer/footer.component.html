@@ -1,0 +1,47 @@
+<footer class="bg-white border-t border-gray-100">
+  <div class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="md:col-span-1">
+        <a href="/" class="flex items-center gap-2 font-bold text-lg text-gray-900">
+          <img ngSrc="/assets/logo.svg" width="28" height="28" alt="Logo Comercio Local" class="h-7 w-7" />
+          <span>Comercio Local</span>
+        </a>
+        <p class="text-gray-500 mt-2 text-sm">
+          Apoyando a los negocios de nuestra comunidad.
+        </p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-gray-900 mb-4">Navegación</h3>
+        <ul class="space-y-3 text-sm">
+          <li><a routerLink="/empresas" class="text-gray-600 hover:text-gray-900 transition-colors">Empresas</a></li>
+          <li><a routerLink="/servicios" class="text-gray-600 hover:text-gray-900 transition-colors">Servicios</a></li>
+          <li><a routerLink="/posts" class="text-gray-600 hover:text-gray-900 transition-colors">Posts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold text-gray-900 mb-4">Legal</h3>
+        <ul class="space-y-3 text-sm">
+          <li><a routerLink="/legal/terminos" class="text-gray-600 hover:text-gray-900 transition-colors">Términos y Condiciones</a></li>
+          <li><a routerLink="/legal/privacidad" class="text-gray-600 hover:text-gray-900 transition-colors">Política de Privacidad</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold text-gray-900 mb-4">Síguenos</h3>
+        <div class="flex mt-4 space-x-4">
+          <a href="#" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:border-gray-900 hover:text-gray-900 transition-colors">
+            <span class="i-tabler-brand-facebook text-xl"></span>
+          </a>
+          <a href="#" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:border-gray-900 hover:text-gray-900 transition-colors">
+            <span class="i-tabler-brand-instagram text-xl"></span>
+          </a>
+          <a href="#" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:border-gray-900 hover:text-gray-900 transition-colors">
+            <span class="i-tabler-brand-twitter text-xl"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-12 border-t border-gray-100 pt-6 text-center text-sm text-gray-500">
+      <p>&copy; {{ year }} Comercio Local. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>

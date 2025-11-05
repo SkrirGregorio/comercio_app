@@ -1,0 +1,29 @@
+<a [routerLink]="['/empresas', empresa().id]" class="group block bg-white rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300">
+  <div class="p-6">
+    <div class="flex items-center gap-4 mb-4">
+      <img [src]="empresa().urlAvatar || 'https://ui-avatars.com/api/?name=' + empresa().nombre" alt="Logo de {{ empresa().nombre }}" class="h-16 w-16 rounded-2xl object-cover border border-gray-100"/>
+      <div class="flex-1 min-w-0">
+        <h3 class="text-lg font-bold text-gray-900 group-hover:text-gray-700 truncate transition-colors">{{ empresa().nombre }}</h3>
+        @if (empresa().direccion) {
+          <p class="text-sm text-gray-500 flex items-center gap-1.5 mt-1">
+            <span class="i-tabler-map-pin w-4 h-4"></span>
+            <span class="truncate">{{ empresa().direccion }}</span>
+          </p>
+        }
+      </div>
+    </div>
+    <p class="text-gray-600 line-clamp-2 text-sm leading-relaxed">
+      {{ empresa().descripcion || 'Esta empresa aún no ha añadido una descripción.' }}
+    </p>
+  </div>
+  <div class="px-6 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between rounded-b-2xl">
+    <div class="flex items-center gap-2 text-sm text-gray-500">
+      <app-star-display [value]="promedioCalificacion()" />
+      <span class="font-semibold text-gray-700">({{ empresa().resenas?.length || 0 }})</span>
+    </div>
+    <span class="inline-flex items-center gap-1.5 font-semibold text-sm text-gray-900">
+      Ver más
+      <span class="i-tabler-arrow-right transition-transform duration-300 group-hover:translate-x-1"></span>
+    </span>
+  </div>
+</a>

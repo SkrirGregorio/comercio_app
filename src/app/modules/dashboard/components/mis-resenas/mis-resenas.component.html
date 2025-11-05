@@ -1,0 +1,107 @@
+<div class="max-w-5xl">
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold text-gray-900">Mis Reseñas</h2>
+    <p class="text-gray-600 mt-2">Todas las reseñas de tus empresas en un solo lugar</p>
+  </div>
+
+  @if (error()) {
+    <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-800">
+      {{ error() }}
+    </div>
+  }
+
+  @if (loading()) {
+    <div class="flex items-center justify-center py-20">
+      <app-loading-spinner label="Cargando reseñas..." />
+    </div>
+  } @else if (resenas().length === 0) {
+    <!-- Empty State -->
+    <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-16 text-center">
+      <div class="inline-flex items-center justify-center h-20 w-20 rounded-full bg-gray-100 mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+        </svg>
+      </div>
+      <h3 class="text-2xl font-bold text-gray-900 mb-3">No hay reseñas todavía</h3>
+      <p class="text-gray-600 mb-8 max-w-md mx-auto">
+        Las reseñas que tus clientes dejen en tus empresas aparecerán aquí. 
+        Comparte la página de tu empresa para que puedan dejar sus opiniones.
+      </p>
+      <a 
+        routerLink="/dashboard/empresas"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+        </svg>
+        Ver Mis Empresas
+      </a>
+    </div>
+  } @else {
+    <!-- Reseñas List -->
+    <div class="space-y-6">
+      @for (resena of resenas(); track resena.id) {
+        <article class="bg-white rounded-2xl border border-gray-200 p-6 hover:border-gray-900 transition-all">
+          <div class="flex items-start gap-4">
+            <!-- Avatar -->
+            <img 
+              [src]="resena.usuario.photoUrl || 'https://ui-avatars.com/api/?name=' + resena.usuario.nombre + '&size=56&background=f3f4f6&color=111'" 
+              [alt]="resena.usuario.nombre" 
+              class="h-14 w-14 rounded-full border-2 border-gray-200">
+            
+            <div class="flex-1 min-w-0">
+              <!-- Header -->
+              <div class="flex items-start justify-between gap-4 mb-3">
+                <div class="flex-1 min-w-0">
+                  <h4 class="font-bold text-gray-900 text-lg truncate">{{ resena.usuario.nombre }}</h4>
+                  <div class="flex items-center gap-3 mt-2">
+                    <app-star-display [value]="resena.calificacion" />
+                    <span class="text-sm text-gray-500">
+                      {{ resena.fechaCreacion | date: 'dd/MM/yyyy' }}
+                    </span>
+                  </div>
+                </div>
+                <button
+                  (click)="deleteResena(resena.id)"
+                  class="px-4 py-2 border border-red-200 rounded-xl text-red-600 font-medium hover:bg-red-50 transition-colors text-sm flex-shrink-0">
+                  Eliminar
+                </button>
+              </div>
+              
+              <!-- Comentario -->
+              @if (resena.comentario) {
+                <p class="text-gray-700 leading-relaxed text-base">{{ resena.comentario }}</p>
+              } @else {
+                <p class="text-gray-400 italic">Sin comentario</p>
+              }
+
+              <!-- Empresa (si está disponible en el futuro) -->
+              <div class="mt-4 pt-4 border-t border-gray-100">
+                <p class="text-sm text-gray-500">
+                  Reseña en: <span class="font-medium text-gray-900">Empresa #{{ resena.empresaId }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+
+    <!-- Stats -->
+    <div class="mt-8 bg-gray-50 rounded-2xl border border-gray-200 p-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <p class="text-3xl font-bold text-gray-900">{{ resenas().length }}</p>
+          <p class="text-sm text-gray-600 mt-1">Total de Reseñas</p>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl font-bold text-gray-900">{{ getPromedioCalificacion().toFixed(1) }}</p>
+          <p class="text-sm text-gray-600 mt-1">Calificación Promedio</p>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl font-bold text-gray-900">{{ getResenasCincoEstrellas() }}</p>
+          <p class="text-sm text-gray-600 mt-1">Reseñas de 5 Estrellas</p>
+        </div>
+      </div>
+    </div>
+  }
+</div>

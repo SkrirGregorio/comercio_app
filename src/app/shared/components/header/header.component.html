@@ -1,0 +1,46 @@
+<header class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-lg border-b border-gray-100">
+  <div class="container flex h-16 items-center justify-between">
+    <a routerLink="/" class="flex items-center gap-2 font-bold text-lg text-gray-900">
+      <img ngSrc="logo.svg" width="28" height="28" alt="Logo Comercio Local" class="h-7 w-7" />
+      <span class="hidden sm:inline-block">Comercio Local</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+      <a routerLink="/empresas" routerLinkActive="text-gray-900" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-900 transition-colors">Empresas</a>
+      <a routerLink="/servicios" routerLinkActive="text-gray-900" class="hover:text-gray-900 transition-colors">Servicios</a>
+      <a routerLink="/posts" routerLinkActive="text-gray-900" class="hover:text-gray-900 transition-colors">Posts</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <div class="hidden sm:flex items-center gap-2">
+        @if (isAuthed()) {
+          <a routerLink="/dashboard" class="px-5 py-2 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors">Panel</a>
+          <button (click)="logout()" class="px-5 py-2 rounded-full border border-gray-200 text-sm font-semibold hover:border-gray-900 transition-colors">Salir</button>
+        } @else {
+          <a routerLink="/auth/login" class="px-5 py-2 rounded-full border border-gray-200 text-sm font-semibold hover:border-gray-900 transition-colors">Entrar</a>
+          <a routerLink="/auth/register" class="px-5 py-2 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors">Registro</a>
+        }
+      </div>
+      <button class="md:hidden h-9 w-9 flex items-center justify-center rounded-full border border-gray-200 bg-white hover:border-gray-900" (click)="toggleMobile()" aria-label="Abrir menú">
+        <span class="i-tabler-menu-2"></span>
+      </button>
+    </div>
+  </div>
+
+  @if (mobileOpen()) {
+    <div class="md:hidden border-t border-gray-100 p-4 space-y-3 bg-white">
+      <a routerLink="/empresas" class="block py-2 text-gray-600 hover:text-gray-900">Empresas</a>
+      <a routerLink="/servicios" class="block py-2 text-gray-600 hover:text-gray-900">Servicios</a>
+      <a routerLink="/posts" class="block py-2 text-gray-600 hover:text-gray-900">Posts</a>
+      <div class="border-t border-gray-100 pt-4 flex flex-col gap-3">
+        @if (isAuthed()) {
+          <a routerLink="/dashboard" class="w-full text-center px-5 py-2 rounded-full bg-gray-900 text-white text-sm font-semibold">Panel</a>
+          <button (click)="logout()" class="w-full text-center px-5 py-2 rounded-full border border-gray-200 text-sm font-semibold">Salir</button>
+        } @else {
+          <a routerLink="/auth/login" class="w-full text-center px-5 py-2 rounded-full border border-gray-200 text-sm font-semibold">Entrar</a>
+          <a routerLink="/auth/register" class="w-full text-center px-5 py-2 rounded-full bg-gray-900 text-white text-sm font-semibold">Registro</a>
+        }
+      </div>
+    </div>
+  }
+</header>

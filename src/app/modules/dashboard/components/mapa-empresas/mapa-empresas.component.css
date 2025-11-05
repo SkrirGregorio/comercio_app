@@ -1,0 +1,28 @@
+/* Estilos para el mapa y marcadores */
+#map-container {
+  width: 100%;
+  height: calc(100vh - 88px); /* Altura total menos el header */
+  position: sticky;
+  top: 0;
+}
+
+/* Estilos para las imágenes dentro de los info windows */
+:host ::ng-deep .gm-style-iw-d {
+  overflow: visible !important;
+}
+
+:host ::ng-deep .gm-style-iw {
+  padding: 0 !important;
+}
+
+/* Mejorar apariencia de los info windows */
+:host ::ng-deep .gm-style .gm-style-iw-c {
+  padding: 0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+:host ::ng-deep .gm-style .gm-style-iw-t::after {
+  background: white !important;
+  box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.1) !important;
+}

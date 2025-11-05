@@ -1,0 +1,88 @@
+<div class="max-w-3xl">
+  <!-- Header -->
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold text-gray-900">
+      {{ isEditMode ? 'Editar Servicio' : 'Nuevo Servicio' }}
+    </h2>
+    <p class="text-gray-600 mt-1">
+      {{ isEditMode ? 'Actualiza la información del servicio' : 'Agrega un nuevo servicio que ofreces' }}
+    </p>
+  </div>
+
+  <app-error-alert [message]="error()" />
+
+  <!-- Form Card -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white rounded-2xl border border-gray-200 p-8">
+    <div class="space-y-6">
+      <!-- Nombre -->
+      <div>
+        <label for="nombre" class="block text-sm font-medium text-gray-900 mb-2">
+          Nombre del Servicio *
+        </label>
+        <input 
+          id="nombre"
+          type="text" 
+          formControlName="nombre"
+          class="w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+          placeholder="Ej: Reparación de laptops"
+        >
+        @if (form.controls['nombre'].touched && form.controls['nombre'].invalid) {
+          <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            El nombre es requerido (mínimo 3 caracteres)
+          </p>
+        }
+      </div>
+
+      <!-- Descripción -->
+      <div>
+        <label for="descripcion" class="block text-sm font-medium text-gray-900 mb-2">
+          Descripción
+        </label>
+        <textarea 
+          id="descripcion"
+          formControlName="descripcion"
+          rows="4"
+          class="w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all resize-none"
+          placeholder="Describe brevemente este servicio (opcional)..."
+        ></textarea>
+        @if (form.controls['descripcion'].touched && form.controls['descripcion'].invalid) {
+          <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            La descripción debe tener al menos 10 caracteres
+          </p>
+        }
+        <p class="text-sm text-gray-500 mt-2">
+          Opcional pero recomendado para dar más contexto
+        </p>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-4 mt-8 pt-6 border-t border-gray-100">
+      <button 
+        type="button"
+        (click)="cancel()"
+        class="px-6 py-3 border border-gray-200 rounded-xl text-gray-900 font-semibold hover:border-gray-900 transition-colors"
+        [disabled]="loading()"
+      >
+        Cancelar
+      </button>
+      <button 
+        type="submit"
+        class="flex-1 px-6 py-3 bg-gray-900 text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        [disabled]="loading() || form.invalid"
+      >
+        @if (loading()) {
+          <app-loading-spinner [label]="isEditMode ? 'Actualizando...' : 'Creando...'" />
+        } @else {
+          <span>{{ isEditMode ? 'Actualizar Servicio' : 'Crear Servicio' }}</span>
+        }
+      </button>
+    </div>
+  </form>
+</div>

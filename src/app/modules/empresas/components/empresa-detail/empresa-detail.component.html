@@ -1,0 +1,220 @@
+<div class="bg-gray-50 min-h-screen">
+  @if (vm$ | async; as vm) {
+    <div>
+      <!-- Banner / Portada -->
+      <div class="relative h-64 md:h-80 bg-gradient-to-br from-gray-100 to-gray-200 bg-cover bg-center" [style.background-image]="vm.urlPortada ? 'url(' + vm.urlPortada + ')' : 'none'">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+      </div>
+
+      <div class="container mx-auto px-4 -mt-24 relative z-10">
+        <div class="max-w-6xl mx-auto">
+          <!-- Card Principal con Avatar -->
+          <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 mb-8">
+            <div class="flex flex-col md:flex-row items-start gap-6">
+              <!-- Avatar -->
+              <div class="flex-shrink-0">
+                <img [src]="vm.urlAvatar || 'https://ui-avatars.com/api/?name=' + vm.nombre + '&size=120&background=f3f4f6&color=111'" 
+                     alt="Avatar de {{ vm.nombre }}" 
+                     class="h-32 w-32 rounded-3xl object-cover border-4 border-white shadow-lg"/>
+              </div>
+
+              <!-- Información Principal -->
+              <div class="flex-1">
+                <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ vm.nombre }}</h1>
+                @if (vm.propietario) {
+                  <p class="text-lg text-gray-600 mb-4">{{ vm.propietario.nombre }}</p>
+                }
+                
+                <div class="flex flex-wrap items-center gap-4 mb-6">
+                  <div class="flex items-center gap-2">
+                    <app-star-display [value]="promedioCalificacion(vm.resenas || [])" />
+                    <span class="text-sm font-semibold text-gray-700">{{ promedioCalificacion(vm.resenas || []).toFixed(1) }}</span>
+                    <span class="text-sm text-gray-500">({{ vm.resenas?.length || 0 }} reseñas)</span>
+                  </div>
+                </div>
+
+                <!-- Información de Contacto -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  @if (vm.direccion) {
+                    <div class="flex items-center gap-3 text-gray-600">
+                      <div class="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                      </div>
+                      <span class="text-sm">{{ vm.direccion }}</span>
+                    </div>
+                  }
+                  @if (vm.telefono) {
+                    <div class="flex items-center gap-3 text-gray-600">
+                      <div class="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                      </div>
+                      <span class="text-sm">{{ vm.telefono }}</span>
+                    </div>
+                  }
+                  @if (vm.email) {
+                    <div class="flex items-center gap-3 text-gray-600">
+                      <div class="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <span class="text-sm">{{ vm.email }}</span>
+                    </div>
+                  }
+                  @if (vm.horario) {
+                    <div class="flex items-center gap-3 text-gray-600">
+                      <div class="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <span class="text-sm">{{ vm.horario }}</span>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenido con Tabs -->
+          <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <!-- Descripción -->
+            <div class="p-8 border-b border-gray-100">
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">Sobre Nosotros</h2>
+              <p class="text-gray-600 leading-relaxed text-lg">{{ vm.descripcion || 'Esta empresa aún no ha añadido una descripción.' }}</p>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="border-b border-gray-100 px-8">
+              <nav class="-mb-px flex gap-8" aria-label="Tabs">
+                <button 
+                  (click)="tab.set('posts')" 
+                  [class.border-gray-900]="tab() === 'posts'"
+                  [class.text-gray-900]="tab() === 'posts'"
+                  [class.border-transparent]="tab() !== 'posts'"
+                  [class.text-gray-500]="tab() !== 'posts'"
+                  class="whitespace-nowrap py-4 border-b-2 font-semibold text-sm hover:text-gray-900 transition-colors">
+                  Posts ({{ vm.posts?.length || 0 }})
+                </button>
+                <button 
+                  (click)="tab.set('servicios')" 
+                  [class.border-gray-900]="tab() === 'servicios'"
+                  [class.text-gray-900]="tab() === 'servicios'"
+                  [class.border-transparent]="tab() !== 'servicios'"
+                  [class.text-gray-500]="tab() !== 'servicios'"
+                  class="whitespace-nowrap py-4 border-b-2 font-semibold text-sm hover:text-gray-900 transition-colors">
+                  Servicios ({{ vm.servicios?.length || 0 }})
+                </button>
+                <button 
+                  (click)="tab.set('resenas')" 
+                  [class.border-gray-900]="tab() === 'resenas'"
+                  [class.text-gray-900]="tab() === 'resenas'"
+                  [class.border-transparent]="tab() !== 'resenas'"
+                  [class.text-gray-500]="tab() !== 'resenas'"
+                  class="whitespace-nowrap py-4 border-b-2 font-semibold text-sm hover:text-gray-900 transition-colors">
+                  Reseñas ({{ vm.resenas?.length || 0 }})
+                </button>
+              </nav>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="p-8">
+              @switch (tab()) {
+                @case ('posts') {
+                  @if (vm.posts && vm.posts.length) {
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      @for (p of vm.posts; track p.id) {
+                        <article class="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-300">
+                          @if (p.imagenUrl) {
+                            <div class="aspect-video bg-gray-100 overflow-hidden">
+                              <img [src]="p.imagenUrl" [alt]="p.titulo" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"/>
+                            </div>
+                          }
+                          <div class="p-6">
+                            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+                              <span class="i-tabler-calendar w-4 h-4"></span>
+                              <time>{{ p.fechaCreacion | date:'dd MMMM yyyy' }}</time>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">{{ p.titulo }}</h3>
+                            <p class="text-gray-600 leading-relaxed line-clamp-3">{{ p.contenido }}</p>
+                          </div>
+                        </article>
+                      }
+                    </div>
+                  } @else {
+                    <div class="text-center py-12">
+                      <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-gray-100 mb-4">
+                        <span class="i-tabler-article text-2xl text-gray-400"></span>
+                      </div>
+                      <p class="text-gray-500">No hay posts todavía.</p>
+                    </div>
+                  }
+                }
+                @case ('servicios') {
+                  @if (vm.servicios && vm.servicios.length) {
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                      @for (s of vm.servicios; track s.id) {
+                        <div class="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                          <span class="i-tabler-tag text-xl text-gray-700"></span>
+                          <span class="font-medium text-gray-900">{{ s.nombre }}</span>
+                        </div>
+                      }
+                    </div>
+                  } @else {
+                    <div class="text-center py-12">
+                      <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-gray-100 mb-4">
+                        <span class="i-tabler-briefcase text-2xl text-gray-400"></span>
+                      </div>
+                      <p class="text-gray-500">No hay servicios listados.</p>
+                    </div>
+                  }
+                }
+                @case ('resenas') {
+                  @if (vm.resenas && vm.resenas.length) {
+                    <div class="space-y-6">
+                      @for (r of vm.resenas; track r.id) {
+                        <article class="pb-6 border-b border-gray-100 last:border-b-0">
+                          <div class="flex items-start gap-4">
+                            <img [src]="r.usuario.photoUrl || 'https://ui-avatars.com/api/?name=' + r.usuario.nombre + '&size=48&background=f3f4f6&color=111'" 
+                                 alt="" 
+                                 class="h-12 w-12 rounded-full">
+                            <div class="flex-1">
+                              <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-semibold text-gray-900">{{ r.usuario.nombre }}</h4>
+                                <app-star-display [value]="r.calificacion" />
+                              </div>
+                              <p class="text-gray-600 leading-relaxed">{{ r.comentario }}</p>
+                            </div>
+                          </div>
+                        </article>
+                      }
+                    </div>
+                  } @else {
+                    <div class="text-center py-12">
+                      <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-gray-100 mb-4">
+                        <span class="i-tabler-star text-2xl text-gray-400"></span>
+                      </div>
+                      <p class="text-gray-500 mb-4">Sé el primero en dejar una reseña.</p>
+                      <button class="px-6 py-2 bg-gray-900 text-white rounded-full font-semibold hover:bg-gray-800 transition-colors">
+                        Escribir reseña
+                      </button>
+                    </div>
+                  }
+                }
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="flex items-center justify-center min-h-screen">
+      <app-loading-spinner label="Cargando empresa..." />
+    </div>
+  }
+</div>

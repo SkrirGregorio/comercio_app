@@ -1,0 +1,136 @@
+<div class="max-w-4xl">
+  <!-- Header -->
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold text-gray-900">
+      {{ isEditMode ? 'Editar Post' : 'Nuevo Post' }}
+    </h2>
+    <p class="text-gray-600 mt-1">
+      {{ isEditMode ? 'Actualiza la información de tu publicación' : 'Crea una nueva publicación para tu empresa' }}
+    </p>
+  </div>
+
+  <app-error-alert [message]="error()" />
+
+  <!-- Form Card -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white rounded-2xl border border-gray-200 p-8">
+    <div class="space-y-6">
+      <!-- Seleccionar Empresa -->
+      <div>
+        <label for="empresaId" class="block text-sm font-medium text-gray-900 mb-2">
+          Empresa *
+        </label>
+        @if (loadingEmpresas()) {
+          <div class="flex items-center gap-2 text-gray-500">
+            <div class="animate-spin h-4 w-4 border-2 border-gray-300 border-t-gray-900 rounded-full"></div>
+            <span class="text-sm">Cargando empresas...</span>
+          </div>
+        } @else {
+          <select 
+            id="empresaId"
+            formControlName="empresaId"
+            class="w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all">
+            <option [value]="null" disabled>Selecciona una empresa</option>
+            @for (empresa of empresas(); track empresa.id) {
+              <option [ngValue]="empresa.id">{{ empresa.nombre }}</option>
+            }
+          </select>
+        }
+        @if (form.controls['empresaId'].touched && form.controls['empresaId'].invalid) {
+          <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Debes seleccionar una empresa
+          </p>
+        }
+      </div>
+
+      <!-- Título -->
+      <div>
+        <label for="titulo" class="block text-sm font-medium text-gray-900 mb-2">
+          Título *
+        </label>
+        <input 
+          id="titulo"
+          type="text" 
+          formControlName="titulo"
+          class="w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+          placeholder="Ej: ¡Nuevos servicios disponibles!"
+        >
+        @if (form.controls['titulo'].touched && form.controls['titulo'].invalid) {
+          <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            El título es requerido (mínimo 5 caracteres)
+          </p>
+        }
+      </div>
+
+      <!-- Contenido -->
+      <div>
+        <label for="contenido" class="block text-sm font-medium text-gray-900 mb-2">
+          Contenido *
+        </label>
+        <textarea 
+          id="contenido"
+          formControlName="contenido"
+          rows="8"
+          class="w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all resize-none"
+          placeholder="Escribe el contenido de tu publicación..."
+        ></textarea>
+        @if (form.controls['contenido'].touched && form.controls['contenido'].invalid) {
+          <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            El contenido es requerido (mínimo 20 caracteres)
+          </p>
+        }
+      </div>
+
+      <!-- Separador para imagen -->
+      <div class="pt-6 border-t border-gray-100">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Imagen del Post</h3>
+        <p class="text-sm text-gray-600 mb-6">
+          Agrega una imagen atractiva para tu publicación (opcional pero recomendado)
+        </p>
+
+        <app-image-upload
+          [type]="'post'"
+          [maxMB]="3"
+          [label]="'Seleccionar Imagen'"
+          [currentImage]="form.value.urlImagen"
+          [autoUpload]="true"
+          (uploadComplete)="onImageUploaded($event)"
+        />
+        <p class="text-xs text-gray-500 mt-2">
+          Imagen horizontal recomendada (ej: 1200x630px) para mejor visualización
+        </p>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-4 mt-8 pt-6 border-t border-gray-100">
+      <button 
+        type="button"
+        (click)="cancel()"
+        class="px-6 py-3 border border-gray-200 rounded-xl text-gray-900 font-semibold hover:border-gray-900 transition-colors"
+        [disabled]="loading()"
+      >
+        Cancelar
+      </button>
+      <button 
+        type="submit"
+        class="flex-1 px-6 py-3 bg-gray-900 text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        [disabled]="loading() || form.invalid"
+      >
+        @if (loading()) {
+          <app-loading-spinner [label]="isEditMode ? 'Actualizando...' : 'Creando...'" />
+        } @else {
+          <span>{{ isEditMode ? 'Actualizar Post' : 'Crear Post' }}</span>
+        }
+      </button>
+    </div>
+  </form>
+</div>

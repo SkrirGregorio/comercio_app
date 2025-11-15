@@ -5,7 +5,7 @@ import { inject } from '@angular/core';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = storage.token;
   const isApi = req.url.startsWith('http://') || req.url.startsWith('https://')
-    ? req.url.includes('localhost:3000')
+    ? req.url.includes('136.111.42.49:3000')
     : true;
 
   const authReq = token && isApi

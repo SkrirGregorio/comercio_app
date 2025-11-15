@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:3000',
+  apiBaseUrl: 'http://136.111.42.49:3000',
   image: {
     maxAvatarMB: 2,
     maxPortadaMB: 5,

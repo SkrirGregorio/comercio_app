@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'http://localhost:3000',
+  apiBaseUrl: 'http://136.111.42.49:3000',
   googleMapsApiKey: 'AIzaSyA78EEPq6tOPPkPRDvocl9bwTMXsFVlO-E', // Reemplaza con tu API key de Google Maps
   image: {
     maxAvatarMB: 2,

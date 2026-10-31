@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, signal, AfterViewInit, OnDestroy, NgZone, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../environments/environment';
 
 declare global {
   interface Window {
@@ -126,7 +127,7 @@ export class MapLocationPickerComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.marker) {
-      this.marker.setMap(null);
+      this.marker.map = null;
     }
     if (this.map) {
       this.map = null;
@@ -170,6 +171,7 @@ export class MapLocationPickerComponent implements AfterViewInit, OnDestroy {
     this.map = new window.google.maps.Map(mapContainer, {
       center: center,
       zoom: 15,
+      mapId: environment.googleMapsMapId,
       mapTypeControl: true,
       streetViewControl: false,
       fullscreenControl: true,
@@ -179,11 +181,10 @@ export class MapLocationPickerComponent implements AfterViewInit, OnDestroy {
     console.log('✅ Map created');
 
     // Crear marcador
-    this.marker = new window.google.maps.Marker({
+    this.marker = new window.google.maps.marker.AdvancedMarkerElement({
       map: this.map,
       position: center,
-      draggable: true,
-      animation: window.google.maps.Animation.DROP
+      gmpDraggable: true
     });
 
     console.log('✅ Marker created');
@@ -227,7 +228,7 @@ export class MapLocationPickerComponent implements AfterViewInit, OnDestroy {
             this.map.setZoom(17);
             
             // Mover marcador
-            this.marker.setPosition(location);
+            this.marker.position = location;
 
             // Actualizar coordenadas
             this.updateSelectedLocation(lat, lng);
@@ -245,14 +246,15 @@ export class MapLocationPickerComponent implements AfterViewInit, OnDestroy {
       const lat = event.latLng.lat();
       const lng = event.latLng.lng();
       
-      this.marker.setPosition(event.latLng);
+      this.marker.position = event.latLng;
       this.updateSelectedLocation(lat, lng);
     });
 
-    // Arrastrar el marcador
-    this.marker.addListener('dragend', (event: any) => {
-      const lat = event.latLng.lat();
-      const lng = event.latLng.lng();
+    // Arrastrar el marcador (position puede ser LatLng o LatLngLiteral)
+    this.marker.addListener('dragend', () => {
+      const position = this.marker.position;
+      const lat = typeof position.lat === 'function' ? position.lat() : position.lat;
+      const lng = typeof position.lng === 'function' ? position.lng() : position.lng;
       this.updateSelectedLocation(lat, lng);
     });
   }

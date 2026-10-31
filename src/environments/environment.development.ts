@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://136.111.42.49:3000',
+  apiBaseUrl: 'http://localhost:3000',
+  googleMapsMapId: 'DEMO_MAP_ID', // Requerido por AdvancedMarkerElement; reemplaza con tu Map ID de Google Cloud
   image: {
     maxAvatarMB: 2,
     maxPortadaMB: 5,

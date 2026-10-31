@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { EmpresasService } from '../../../../core/services/empresas.service';
 import { Empresa } from '../../../../core/models/empresa.model';
 import { Router } from '@angular/router';
+import { environment } from '../../../../../environments/environment';
 
 declare global {
   interface Window {
@@ -185,6 +186,7 @@ export class MapaEmpresasComponent implements OnInit, AfterViewInit {
     this.map = new window.google.maps.Map(mapContainer, {
       center: center,
       zoom: 13,
+      mapId: environment.googleMapsMapId,
       mapTypeControl: true,
       streetViewControl: false,
       fullscreenControl: true,
@@ -207,22 +209,20 @@ export class MapaEmpresasComponent implements OnInit, AfterViewInit {
 
     // Remover marcador anterior
     if (this.userMarker) {
-      this.userMarker.setMap(null);
+      this.userMarker.map = null;
     }
 
+    // Punto azul del usuario (centrado sobre la posición)
+    const dot = document.createElement('div');
+    dot.style.cssText = 'width:20px;height:20px;border-radius:50%;background:#3B82F6;border:3px solid #FFFFFF;box-shadow:0 1px 4px rgba(0,0,0,.3);transform:translateY(50%);';
+
     // Crear marcador del usuario
-    this.userMarker = new window.google.maps.Marker({
+    this.userMarker = new window.google.maps.marker.AdvancedMarkerElement({
       map: this.map,
       position: this.userLocation(),
-      icon: {
-        path: window.google.maps.SymbolPath.CIRCLE,
-        scale: 10,
-        fillColor: '#3B82F6',
-        fillOpacity: 1,
-        strokeColor: '#FFFFFF',
-        strokeWeight: 3
-      },
-      title: 'Tu ubicación'
+      content: dot,
+      title: 'Tu ubicación',
+      gmpClickable: true
     });
 
     // Info window para el usuario
@@ -230,8 +230,8 @@ export class MapaEmpresasComponent implements OnInit, AfterViewInit {
       content: '<div class="p-2"><strong>Tu ubicación</strong></div>'
     });
 
-    this.userMarker.addListener('click', () => {
-      infoWindow.open(this.map, this.userMarker);
+    this.userMarker.addEventListener('gmp-click', () => {
+      infoWindow.open({ map: this.map, anchor: this.userMarker });
     });
   }
 
@@ -239,7 +239,7 @@ export class MapaEmpresasComponent implements OnInit, AfterViewInit {
     if (!this.map) return;
 
     // Limpiar marcadores anteriores
-    this.markers.forEach(marker => marker.setMap(null));
+    this.markers.forEach(marker => marker.map = null);
     this.markers = [];
 
     // Agregar marcadores de empresas
@@ -255,21 +255,12 @@ export class MapaEmpresasComponent implements OnInit, AfterViewInit {
           return;
         }
 
-        // Crear icono personalizado con avatar de la empresa
-        const markerIcon = {
-          url: empresa.urlAvatar || '/assets/default-business.svg',
-          scaledSize: new window.google.maps.Size(40, 40),
-          origin: new window.google.maps.Point(0, 0),
-          anchor: new window.google.maps.Point(20, 40),
-          optimized: false
-        };
-
-        const marker = new window.google.maps.Marker({
+        const marker = new window.google.maps.marker.AdvancedMarkerElement({
           map: this.map,
           position: { lat, lng },
           title: empresa.nombre,
-          animation: window.google.maps.Animation.DROP,
-          icon: markerIcon
+          content: this.createAvatarMarkerContent(empresa),
+          gmpClickable: true
         });
 
         // Guardar referencia al ID de la empresa
@@ -297,18 +288,35 @@ export class MapaEmpresasComponent implements OnInit, AfterViewInit {
           content: infoContent
         });
 
-        marker.addListener('click', () => {
+        marker.addEventListener('gmp-click', () => {
           // Cerrar otras info windows
           this.markers.forEach(m => {
             if (m.infoWindow) m.infoWindow.close();
           });
-          infoWindow.open(this.map, marker);
+          infoWindow.open({ map: this.map, anchor: marker });
         });
 
         marker.infoWindow = infoWindow;
         this.markers.push(marker);
       }
     });
+  }
+
+  // Avatar circular de la empresa como contenido del marcador, con animación de caída
+  private createAvatarMarkerContent(empresa: Empresa): HTMLElement {
+    const img = document.createElement('img');
+    img.src = empresa.urlAvatar || '/assets/default-business.svg';
+    img.alt = empresa.nombre;
+    img.style.cssText = 'width:40px;height:40px;border-radius:50%;object-fit:cover;background:#F3F4F6;border:2px solid #FFFFFF;box-shadow:0 1px 4px rgba(0,0,0,.3);';
+    img.onerror = () => {
+      img.onerror = null;
+      img.src = '/assets/default-business.svg';
+    };
+    img.animate(
+      [{ transform: 'translateY(-200px)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1 }],
+      { duration: 400, easing: 'ease-out' }
+    );
+    return img;
   }
 
   viewEmpresaDetail(empresaId: number) {
@@ -342,7 +350,7 @@ export class MapaEmpresasComponent implements OnInit, AfterViewInit {
           if (m.infoWindow) m.infoWindow.close();
         });
         // Abrir la ventana de información del marcador seleccionado
-        marker.infoWindow.open(this.map, marker);
+        marker.infoWindow.open({ map: this.map, anchor: marker });
       }
     }
   }

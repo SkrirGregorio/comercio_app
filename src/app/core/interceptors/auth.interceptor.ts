@@ -1,11 +1,11 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { storage } from '../../shared/utils/storage';
-import { inject } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = storage.token;
   const isApi = req.url.startsWith('http://') || req.url.startsWith('https://')
-    ? req.url.includes('136.111.42.49:3000')
+    ? req.url.startsWith(environment.apiBaseUrl)
     : true;
 
   const authReq = token && isApi

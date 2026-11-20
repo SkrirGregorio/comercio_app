@@ -24,8 +24,8 @@ export class RegisterComponent {
   form = this.fb.nonNullable.group({
     nombre: ['', [Validators.required, Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
-    role: this.fb.control<'consumidor' | 'propietario' | 'admin'>('consumidor', { nonNullable: true, validators: [Validators.required] }),
-    password: ['', [Validators.required, Validators.minLength(6)]]
+    role: this.fb.control<'consumidor' | 'propietario'>('consumidor', { nonNullable: true, validators: [Validators.required] }),
+    password: ['', [Validators.required, Validators.minLength(8)]]
   });
 
   onSubmit() {
@@ -33,7 +33,7 @@ export class RegisterComponent {
     this.loading.set(true);
     this.error.set(null);
     this.auth.register(this.form.getRawValue()).subscribe({
-      next: () => this.router.navigateByUrl('/'),
+      next: () => this.router.navigateByUrl('/dashboard'),
       error: (e) => {
         this.error.set(e?.message ?? 'Error al registrar');
         this.loading.set(false);

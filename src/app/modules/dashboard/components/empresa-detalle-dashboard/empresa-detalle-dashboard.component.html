@@ -231,15 +231,18 @@
 
                     <!-- Actions -->
                     <div class="flex items-center gap-2 pt-4 border-t border-gray-200">
-                      <a 
-                        [routerLink]="['/dashboard/empresas', empresaId, 'servicios', 'editar', servicio.id]"
-                        class="flex-1 px-3 py-2 border border-gray-200 rounded-xl text-gray-900 font-medium hover:border-gray-900 transition-colors text-center text-xs">
-                        Editar
-                      </a>
+                      <!-- El catálogo de servicios es compartido: solo un admin puede editarlo -->
+                      @if (esAdmin()) {
+                        <a 
+                          [routerLink]="['/dashboard/empresas', empresaId, 'servicios', 'editar', servicio.id]"
+                          class="flex-1 px-3 py-2 border border-gray-200 rounded-xl text-gray-900 font-medium hover:border-gray-900 transition-colors text-center text-xs">
+                          Editar
+                        </a>
+                      }
                       <button
                         (click)="deleteServicio(servicio.id)"
                         class="px-3 py-2 border border-red-200 rounded-xl text-red-600 font-medium hover:bg-red-50 transition-colors text-xs">
-                        Eliminar
+                        Quitar
                       </button>
                     </div>
                   </div>

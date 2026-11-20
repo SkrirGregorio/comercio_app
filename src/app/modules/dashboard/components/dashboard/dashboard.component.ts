@@ -1,8 +1,7 @@
-import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 
 import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
-import { Usuario } from '../../../../core/models/usuario.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,15 +14,12 @@ import { Usuario } from '../../../../core/models/usuario.model';
 export class DashboardComponent implements OnInit {
   private authService = inject(AuthService);
   
-  user = signal<Usuario | null>(null);
+  // El authGuard ya cargó el perfil antes de entrar al panel
+  readonly user = this.authService.user;
+  readonly esPropietario = computed(() => ['propietario', 'admin'].includes(this.user()?.role ?? ''));
   activeTab = signal<string>('empresas');
 
-  ngOnInit() {
-    this.authService.profile().subscribe({
-      next: (data: Usuario) => this.user.set(data),
-      error: (err: any) => console.error('Error loading profile', err)
-    });
-  }
+  ngOnInit() {}
 
   setActiveTab(tab: string) {
     this.activeTab.set(tab);

@@ -22,7 +22,7 @@ export class ResenasService {
    * Obtener reseñas de una empresa específica
    */
   getByEmpresa(empresaId: number): Observable<Resena[]> {
-    return this.http.get<Resena[]>(`${this.apiUrl}?empresaId=${empresaId}`);
+    return this.http.get<Resena[]>(`${this.apiUrl}/empresa/${empresaId}`);
   }
 
   /**

@@ -36,6 +36,7 @@
 
           <!-- Navigation Links -->
           <nav class="mt-6 space-y-2">
+            @if (esPropietario()) {
             <a 
               routerLink="/dashboard/empresas" 
               routerLinkActive="bg-gray-900 text-white"
@@ -47,6 +48,7 @@
               </svg>
               <span class="font-medium">Mis Empresas</span>
             </a>
+            }
 
             <a 
               routerLink="/dashboard/mapa-empresas" 

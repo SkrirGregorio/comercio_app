@@ -1,9 +1,10 @@
-import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EmpresasService } from '../../../../core/services/empresas.service';
 import { PostsService } from '../../../../core/services/posts.service';
 import { ServiciosService } from '../../../../core/services/servicios.service';
+import { AuthService } from '../../../../core/services/auth.service';
 import { ResenasService } from '../../../../core/services/resenas.service';
 import { Empresa } from '../../../../core/models/empresa.model';
 import { Post } from '../../../../core/models/post.model';
@@ -27,6 +28,8 @@ export class EmpresaDetalleDashboardComponent implements OnInit {
   private empresasService = inject(EmpresasService);
   private postsService = inject(PostsService);
   private serviciosService = inject(ServiciosService);
+  private authService = inject(AuthService);
+  readonly esAdmin = computed(() => this.authService.user()?.role === 'admin');
   private resenasService = inject(ResenasService);
 
   empresa = signal<Empresa | null>(null);
@@ -131,13 +134,13 @@ export class EmpresaDetalleDashboardComponent implements OnInit {
   }
 
   deleteServicio(servicioId: number) {
-    if (confirm('¿Estás seguro de eliminar este servicio?')) {
-      this.serviciosService.delete(servicioId).subscribe({
+    if (confirm('¿Quitar este servicio de la empresa?')) {
+      this.serviciosService.quitarDeEmpresa(this.empresaId, servicioId).subscribe({
         next: () => {
           this.servicios.set(this.servicios().filter(s => s.id !== servicioId));
         },
         error: (err: any) => {
-          this.error.set('Error al eliminar servicio');
+          this.error.set('Error al quitar el servicio');
         }
       });
     }

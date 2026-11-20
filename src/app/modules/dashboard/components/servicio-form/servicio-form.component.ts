@@ -88,7 +88,7 @@ export class ServicioFormComponent implements OnInit {
 
     const request = this.isEditMode && this.servicioId
       ? this.serviciosService.update(this.servicioId, servicioData)
-      : this.serviciosService.create(servicioData);
+      : this.serviciosService.create({ ...servicioData, empresaId: this.empresaIdFromRoute ?? undefined });
 
     request.subscribe({
       next: () => {

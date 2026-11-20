@@ -11,6 +11,8 @@ export interface Servicio {
 export interface CreateServicioDto {
   nombre: string;
   descripcion?: string;
+  /** Empresa a la que se vincula el servicio */
+  empresaId?: number;
 }
 
 export interface UpdateServicioDto {

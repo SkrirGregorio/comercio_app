@@ -47,7 +47,14 @@ export class ServiciosService {
   }
 
   /**
-   * Eliminar un servicio
+   * Quitar un servicio de una empresa (no lo borra del catálogo)
+   */
+  quitarDeEmpresa(empresaId: number, servicioId: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiBaseUrl}/empresas/${empresaId}/servicios/${servicioId}`);
+  }
+
+  /**
+   * Eliminar un servicio del catálogo (solo admin)
    */
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);

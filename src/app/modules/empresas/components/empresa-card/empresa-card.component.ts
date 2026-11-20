@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import type { Empresa } from '../../../../core/models/empresa.model';
 import { RouterLink } from '@angular/router';
@@ -9,6 +9,7 @@ import { StarDisplayComponent } from '../../../../shared/components/star-display
   standalone: true,
   imports: [RouterLink, StarDisplayComponent],
   templateUrl: './empresa-card.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './empresa-card.component.css'
 })
 export class EmpresaCardComponent {

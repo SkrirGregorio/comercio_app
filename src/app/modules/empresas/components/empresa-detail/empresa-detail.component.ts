@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { EmpresasService } from '../../../../core/services/empresas.service';
@@ -12,6 +12,7 @@ import type { Resena } from '../../../../core/models/resena.model';
   standalone: true,
   imports: [AsyncPipe, DatePipe, StarDisplayComponent, LoadingSpinnerComponent],
   templateUrl: './empresa-detail.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './empresa-detail.component.css'
 })
 export class EmpresaDetailComponent {

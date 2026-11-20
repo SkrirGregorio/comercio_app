@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { PostsService } from '../../../../core/services/posts.service';
@@ -11,6 +11,7 @@ import { ErrorAlertComponent } from '../../../../shared/components/error-alert/e
   standalone: true,
   imports: [CommonModule, RouterLink, LoadingSpinnerComponent, ErrorAlertComponent],
   templateUrl: './mis-posts.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './mis-posts.component.css'
 })
 export class MisPostsComponent implements OnInit {

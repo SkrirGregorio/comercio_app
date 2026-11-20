@@ -1,10 +1,11 @@
-import { Component, inject, OnInit, signal, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, signal, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
 import { EmpresasService } from '../../../../core/services/empresas.service';
 import { Empresa } from '../../../../core/models/empresa.model';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
+import { GoogleMapsLoaderService } from '../../../../core/services/google-maps-loader.service';
 
 declare global {
   interface Window {
@@ -19,13 +20,15 @@ interface EmpresaWithDistance extends Empresa {
 @Component({
   selector: 'app-mapa-empresas-publico',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './mapa-empresas-publico.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './mapa-empresas-publico.component.css'
 })
 export class MapaEmpresasPublicoComponent implements OnInit, AfterViewInit {
   private empresasService = inject(EmpresasService);
   private router = inject(Router);
+  private mapsLoader = inject(GoogleMapsLoaderService);
 
   empresas = signal<EmpresaWithDistance[]>([]);
   empresasFiltered = signal<EmpresaWithDistance[]>([]);
@@ -46,7 +49,7 @@ export class MapaEmpresasPublicoComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => this.initMap(), 500);
+    this.initMap();
   }
 
   getUserLocation() {
@@ -172,8 +175,14 @@ export class MapaEmpresasPublicoComponent implements OnInit, AfterViewInit {
 
   private initMap() {
     const mapContainer = document.querySelector('#map-container');
-    if (!mapContainer || !window.google) {
-      setTimeout(() => this.initMap(), 500);
+    if (!mapContainer) {
+      setTimeout(() => this.initMap(), 300);
+      return;
+    }
+    if (!window.google?.maps?.Map) {
+      this.mapsLoader.load()
+        .then(() => this.initMap())
+        .catch((err) => console.error('No se pudo cargar Google Maps', err));
       return;
     }
 

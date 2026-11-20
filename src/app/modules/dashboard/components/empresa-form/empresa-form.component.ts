@@ -1,5 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EmpresasService } from '../../../../core/services/empresas.service';
@@ -12,8 +12,9 @@ import { MapLocationPickerComponent } from '../../../../shared/components/map-lo
 @Component({
   selector: 'app-empresa-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, LoadingSpinnerComponent, ErrorAlertComponent, ImageUploadComponent, MapLocationPickerComponent],
+  imports: [ReactiveFormsModule, LoadingSpinnerComponent, ErrorAlertComponent, ImageUploadComponent, MapLocationPickerComponent],
   templateUrl: './empresa-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './empresa-form.component.css'
 })
 export class EmpresaFormComponent implements OnInit {

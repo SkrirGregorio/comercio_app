@@ -1,4 +1,4 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { Component, inject, signal, WritableSignal, ChangeDetectionStrategy } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
@@ -8,6 +8,7 @@ import { DOCUMENT } from '@angular/common';
   selector: 'app-header',
   standalone: true,
   imports: [RouterLink, RouterLinkActive, NgOptimizedImage],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {

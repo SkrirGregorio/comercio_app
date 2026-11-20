@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Output, input, signal, inject, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Output, input, signal, inject, effect, ChangeDetectionStrategy } from '@angular/core';
+
 import { validateImage } from '../../utils/image';
 import { UploadService } from '../../../core/services/upload.service';
 
@@ -9,8 +9,9 @@ export type UploadType = 'avatar' | 'portada' | 'post';
 @Component({
   selector: 'app-image-upload',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './image-upload.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './image-upload.component.css'
 })
 export class ImageUploadComponent {

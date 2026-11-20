@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output, signal, AfterViewInit, OnDestroy, NgZone, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal, AfterViewInit, OnDestroy, NgZone, inject, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../../environments/environment';
+import { GoogleMapsLoaderService } from '../../../core/services/google-maps-loader.service';
 
 declare global {
   interface Window {
@@ -14,20 +15,12 @@ declare global {
   imports: [CommonModule],
   template: `
     <div class="map-picker-container">
-      <!-- Search Box usando input tradicional -->
+      <!-- Buscador (PlaceAutocompleteElement de Places API New, se inserta en initMap) -->
       <div class="search-container mb-4">
-        <div class="relative">
-          <input
-            #searchInput
-            type="text"
-            id="pac-input"
-            placeholder="Buscar ubicación (ej: Jutiapa, Guatemala)..."
-            class="w-full px-4 py-3 pl-12 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-          <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-        </div>
+        <div #searchHost class="pac-host"></div>
+        @if (mapError()) {
+          <p class="mt-2 text-sm text-red-600">{{ mapError() }}</p>
+        }
       </div>
 
       <!-- Map Container -->
@@ -78,6 +71,7 @@ declare global {
       </div>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [`
     .map-container {
       width: 100%;
@@ -90,21 +84,12 @@ declare global {
       z-index: 1;
     }
 
-    /* Estilos para las sugerencias del autocomplete */
-    :host ::ng-deep .pac-container {
-      z-index: 9999 !important;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      margin-top: 4px;
-    }
-
-    :host ::ng-deep .pac-item {
-      padding: 8px 12px;
-      cursor: pointer;
-    }
-
-    :host ::ng-deep .pac-item:hover {
-      background-color: #f3f4f6;
+    /* Web component gmp-place-autocomplete */
+    :host ::ng-deep gmp-place-autocomplete {
+      width: 100%;
+      color-scheme: light;
+      border: 2px solid #d1d5db;
+      border-radius: 0.75rem;
     }
   `]
 })
@@ -116,13 +101,25 @@ export class MapLocationPickerComponent implements AfterViewInit, OnDestroy {
   selectedLat = signal<number | null>(null);
   selectedLng = signal<number | null>(null);
 
+  mapError = signal<string | null>(null);
+
+  @ViewChild('mapContainer') private mapContainer?: ElementRef<HTMLElement>;
+  @ViewChild('searchHost') private searchHost?: ElementRef<HTMLElement>;
+
   private map: any = null;
   private marker: any = null;
   private autocomplete: any = null;
   private ngZone = inject(NgZone);
+  private mapsLoader = inject(GoogleMapsLoaderService);
 
   ngAfterViewInit() {
-    this.loadMap();
+    this.mapsLoader
+      .load()
+      .then(() => this.initMap())
+      .catch((err) => {
+        console.error(err);
+        this.mapError.set('No se pudo cargar Google Maps. Revisa tu conexión o la configuración de la API key.');
+      });
   }
 
   ngOnDestroy() {
@@ -134,30 +131,12 @@ export class MapLocationPickerComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private loadMap() {
-    // Wait for Google Maps to be loaded
-    const checkGoogleMaps = setInterval(() => {
-      if (typeof window.google !== 'undefined' && window.google.maps) {
-        clearInterval(checkGoogleMaps);
-        this.initMap();
-      }
-    }, 100);
-  }
-
   private initMap() {
-    const mapContainer = document.querySelector('.map-container');
-    const searchInput = document.querySelector('#pac-input') as HTMLInputElement;
+    const mapContainer = this.mapContainer?.nativeElement;
+    if (!mapContainer) return;
 
-    if (!mapContainer || !window.google) {
-      console.error('❌ Map container or Google Maps not found');
-      setTimeout(() => this.initMap(), 500);
-      return;
-    }
-
-    console.log('✅ Initializing map...');
-
-    // Default center (Lima, Peru)
-    let center = { lat: -12.046374, lng: -77.042793 };
+    // Centro por defecto: Jutiapa, Guatemala
+    let center = { lat: 14.291667, lng: -89.895556 };
 
     // Si hay coordenadas iniciales, usarlas
     if (this.initialLat !== null && this.initialLng !== null) {
@@ -189,56 +168,32 @@ export class MapLocationPickerComponent implements AfterViewInit, OnDestroy {
 
     console.log('✅ Marker created');
 
-    // Setup Autocomplete en el input
-    if (searchInput && window.google.maps.places) {
+    // Buscador con PlaceAutocompleteElement (Places API New).
+    // El widget legacy google.maps.places.Autocomplete ya no está disponible para proyectos nuevos.
+    const searchHost = this.searchHost?.nativeElement;
+    if (searchHost && window.google.maps.places?.PlaceAutocompleteElement) {
       this.ngZone.runOutsideAngular(() => {
-        console.log('🔧 Setting up Autocomplete...');
-        
-        this.autocomplete = new window.google.maps.places.Autocomplete(searchInput, {
-          fields: ['geometry', 'name', 'formatted_address'],
-          types: ['geocode', 'establishment']
+        this.autocomplete = new window.google.maps.places.PlaceAutocompleteElement({
+          includedRegionCodes: ['gt'],
+          locationBias: center,
         });
+        this.autocomplete.placeholder = 'Buscar ubicación (ej: Jutiapa, Guatemala)...';
+        searchHost.replaceChildren(this.autocomplete);
 
-        // Vincular al mapa
-        this.autocomplete.bindTo('bounds', this.map);
+        this.autocomplete.addEventListener('gmp-select', async (event: any) => {
+          const place = event.placePrediction.toPlace();
+          await place.fetchFields({ fields: ['displayName', 'formattedAddress', 'location'] });
+          const location = place.location;
+          if (!location) return;
 
-        console.log('✅ Autocomplete created');
-
-        // Escuchar cuando se selecciona un lugar
-        this.autocomplete.addListener('place_changed', () => {
-          console.log('🔵 Place changed event fired');
-          
           this.ngZone.run(() => {
-            const place = this.autocomplete.getPlace();
-            console.log('📍 Place selected:', place);
-
-            if (!place.geometry || !place.geometry.location) {
-              console.log('❌ No geometry found for place');
-              return;
-            }
-
-            const location = place.geometry.location;
-            const lat = location.lat();
-            const lng = location.lng();
-
-            console.log('🎯 Coordinates extracted:', { lat, lng });
-
-            // Centrar mapa
             this.map.setCenter(location);
             this.map.setZoom(17);
-            
-            // Mover marcador
             this.marker.position = location;
-
-            // Actualizar coordenadas
-            this.updateSelectedLocation(lat, lng);
-
-            console.log('✅ Map and marker updated from search');
+            this.updateSelectedLocation(location.lat(), location.lng());
           });
         });
       });
-    } else {
-      console.error('❌ Search input or Places API not found');
     }
 
     // Click en el mapa
@@ -251,7 +206,7 @@ export class MapLocationPickerComponent implements AfterViewInit, OnDestroy {
     });
 
     // Arrastrar el marcador (position puede ser LatLng o LatLngLiteral)
-    this.marker.addListener('dragend', () => {
+    this.marker.addEventListener('gmp-dragend', () => {
       const position = this.marker.position;
       const lat = typeof position.lat === 'function' ? position.lat() : position.lat;
       const lng = typeof position.lng === 'function' ? position.lng() : position.lng;

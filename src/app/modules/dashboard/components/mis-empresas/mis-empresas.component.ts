@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { EmpresasService } from '../../../../core/services/empresas.service';
@@ -10,6 +10,7 @@ import { Empresa } from '../../../../core/models/empresa.model';
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './mis-empresas.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './mis-empresas.component.css'
 })
 export class MisEmpresasComponent implements OnInit {

@@ -1,5 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+
 import { UsuariosService } from '../../../../core/services/usuarios.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Usuario, Role } from '../../../../core/models/usuario.model';
@@ -8,8 +8,9 @@ import { LoadingSpinnerComponent } from '../../../../shared/components/loading-s
 @Component({
   selector: 'app-admin-usuarios',
   standalone: true,
-  imports: [CommonModule, LoadingSpinnerComponent],
+  imports: [LoadingSpinnerComponent],
   templateUrl: './admin-usuarios.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './admin-usuarios.component.css'
 })
 export class AdminUsuariosComponent implements OnInit {

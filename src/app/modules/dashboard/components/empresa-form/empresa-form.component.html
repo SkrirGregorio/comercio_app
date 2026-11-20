@@ -137,7 +137,7 @@
           <input 
             id="sitioWeb"
             type="url" 
-            formControlName="sitioWeb"
+            formControlName="webSite"
             class="w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
             placeholder="https://www.tunegocio.com"
           >
@@ -345,8 +345,8 @@
           <!-- Map Component -->
           <div class="p-6">
             <app-map-location-picker
-              [initialLat]="form.get('latitud')?.value"
-              [initialLng]="form.get('longitud')?.value"
+              [initialLat]="form.get('latitud')?.value ?? null"
+              [initialLng]="form.get('longitud')?.value ?? null"
               (locationSelected)="onLocationSelected($event)"
             ></app-map-location-picker>
           </div>

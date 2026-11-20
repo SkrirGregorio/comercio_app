@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EmpresasService } from '../../../../core/services/empresas.service';
@@ -18,6 +18,7 @@ import { StarDisplayComponent } from '../../../../shared/components/star-display
   standalone: true,
   imports: [CommonModule, RouterLink, LoadingSpinnerComponent, ErrorAlertComponent, StarDisplayComponent],
   templateUrl: './empresa-detalle-dashboard.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './empresa-detalle-dashboard.component.css'
 })
 export class EmpresaDetalleDashboardComponent implements OnInit {

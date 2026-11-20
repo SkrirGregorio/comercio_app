@@ -1,10 +1,11 @@
-import { Component, inject, OnInit, signal, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, signal, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
 import { EmpresasService } from '../../../../core/services/empresas.service';
 import { Empresa } from '../../../../core/models/empresa.model';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
+import { GoogleMapsLoaderService } from '../../../../core/services/google-maps-loader.service';
 
 declare global {
   interface Window {
@@ -19,13 +20,15 @@ interface EmpresaWithDistance extends Empresa {
 @Component({
   selector: 'app-mapa-empresas',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './mapa-empresas.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './mapa-empresas.component.css'
 })
 export class MapaEmpresasComponent implements OnInit, AfterViewInit {
   private empresasService = inject(EmpresasService);
   private router = inject(Router);
+  private mapsLoader = inject(GoogleMapsLoaderService);
 
   empresas = signal<EmpresaWithDistance[]>([]);
   empresasFiltered = signal<EmpresaWithDistance[]>([]);
@@ -46,7 +49,7 @@ export class MapaEmpresasComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => this.initMap(), 500);
+    this.initMap();
   }
 
   getUserLocation() {
@@ -62,12 +65,12 @@ export class MapaEmpresasComponent implements OnInit, AfterViewInit {
         },
         (error) => {
           console.warn('No se pudo obtener la ubicación del usuario:', error);
-          // Usar ubicación por defecto (Lima, Peru)
-          this.userLocation.set({ lat: -12.046374, lng: -77.042793 });
+          // Usar ubicación por defecto (Jutiapa, Guatemala)
+          this.userLocation.set({ lat: 14.291667, lng: -89.895556 });
         }
       );
     } else {
-      this.userLocation.set({ lat: -12.046374, lng: -77.042793 });
+      this.userLocation.set({ lat: 14.291667, lng: -89.895556 });
     }
   }
 
@@ -176,12 +179,18 @@ export class MapaEmpresasComponent implements OnInit, AfterViewInit {
   // Google Maps Methods
   private initMap() {
     const mapContainer = document.querySelector('#map-container');
-    if (!mapContainer || !window.google) {
-      setTimeout(() => this.initMap(), 500);
+    if (!mapContainer) {
+      setTimeout(() => this.initMap(), 300);
+      return;
+    }
+    if (!window.google?.maps?.Map) {
+      this.mapsLoader.load()
+        .then(() => this.initMap())
+        .catch((err) => console.error('No se pudo cargar Google Maps', err));
       return;
     }
 
-    const center = this.userLocation() || { lat: -12.046374, lng: -77.042793 };
+    const center = this.userLocation() || { lat: 14.291667, lng: -89.895556 };
 
     this.map = new window.google.maps.Map(mapContainer, {
       center: center,

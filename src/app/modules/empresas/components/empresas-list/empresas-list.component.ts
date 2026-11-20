@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { EmpresaCardComponent } from '../empresa-card/empresa-card.component';
 import { EmpresasService } from '../../../../core/services/empresas.service';
@@ -9,6 +9,7 @@ import type { Empresa } from '../../../../core/models/empresa.model';
   standalone: true,
   imports: [AsyncPipe, EmpresaCardComponent],
   templateUrl: './empresas-list.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './empresas-list.component.css'
 })
 export class EmpresasListComponent {

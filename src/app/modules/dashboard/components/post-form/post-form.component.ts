@@ -1,5 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PostsService } from '../../../../core/services/posts.service';
@@ -13,8 +13,9 @@ import { ImageUploadComponent, UploadResult } from '../../../../shared/component
 @Component({
   selector: 'app-post-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, LoadingSpinnerComponent, ErrorAlertComponent, ImageUploadComponent],
+  imports: [ReactiveFormsModule, LoadingSpinnerComponent, ErrorAlertComponent, ImageUploadComponent],
   templateUrl: './post-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './post-form.component.css'
 })
 export class PostFormComponent implements OnInit {

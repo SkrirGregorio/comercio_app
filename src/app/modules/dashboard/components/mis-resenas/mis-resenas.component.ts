@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ResenasService } from '../../../../core/services/resenas.service';
@@ -11,6 +11,7 @@ import { StarDisplayComponent } from '../../../../shared/components/star-display
   standalone: true,
   imports: [CommonModule, RouterLink, LoadingSpinnerComponent, StarDisplayComponent],
   templateUrl: './mis-resenas.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './mis-resenas.component.css'
 })
 export class MisResenasComponent implements OnInit {

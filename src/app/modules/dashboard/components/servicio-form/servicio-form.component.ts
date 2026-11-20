@@ -1,5 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ServiciosService } from '../../../../core/services/servicios.service';
@@ -10,8 +10,9 @@ import { ErrorAlertComponent } from '../../../../shared/components/error-alert/e
 @Component({
   selector: 'app-servicio-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, LoadingSpinnerComponent, ErrorAlertComponent],
+  imports: [ReactiveFormsModule, LoadingSpinnerComponent, ErrorAlertComponent],
   templateUrl: './servicio-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './servicio-form.component.css'
 })
 export class ServicioFormComponent implements OnInit {

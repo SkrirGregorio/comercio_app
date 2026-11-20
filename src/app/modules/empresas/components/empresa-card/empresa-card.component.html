@@ -6,7 +6,7 @@
         <h3 class="text-lg font-bold text-gray-900 group-hover:text-gray-700 truncate transition-colors">{{ empresa().nombre }}</h3>
         @if (empresa().direccion) {
           <p class="text-sm text-gray-500 flex items-center gap-1.5 mt-1">
-            <span class="i-tabler-map-pin w-4 h-4"></span>
+            <app-icon name="map-pin" class="text-base" />
             <span class="truncate">{{ empresa().direccion }}</span>
           </p>
         }
@@ -23,7 +23,7 @@
     </div>
     <span class="inline-flex items-center gap-1.5 font-semibold text-sm text-gray-900">
       Ver más
-      <span class="i-tabler-arrow-right transition-transform duration-300 group-hover:translate-x-1"></span>
+      <app-icon name="arrow-right" class="transition-transform duration-300 group-hover:translate-x-1" />
     </span>
   </div>
 </a>

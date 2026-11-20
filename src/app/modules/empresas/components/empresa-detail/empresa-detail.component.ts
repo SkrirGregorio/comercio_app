@@ -6,11 +6,12 @@ import { switchMap } from 'rxjs/operators';
 import { StarDisplayComponent } from '../../../../shared/components/star-display/star-display.component';
 import { LoadingSpinnerComponent } from '../../../../shared/components/loading-spinner/loading-spinner.component';
 import type { Resena } from '../../../../core/models/resena.model';
+import { IconComponent } from '../../../../shared/components/icon/icon.component';
 
 @Component({
   selector: 'app-empresa-detail',
   standalone: true,
-  imports: [AsyncPipe, DatePipe, StarDisplayComponent, LoadingSpinnerComponent],
+  imports: [AsyncPipe, DatePipe, StarDisplayComponent, LoadingSpinnerComponent, IconComponent],
   templateUrl: './empresa-detail.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './empresa-detail.component.css'

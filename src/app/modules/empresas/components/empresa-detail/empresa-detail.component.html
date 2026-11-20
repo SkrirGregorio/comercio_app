@@ -137,7 +137,7 @@
                           }
                           <div class="p-6">
                             <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
-                              <span class="i-tabler-calendar w-4 h-4"></span>
+                              <app-icon name="calendar" class="text-base" />
                               <time>{{ p.fechaCreacion | date:'dd MMMM yyyy' }}</time>
                             </div>
                             <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">{{ p.titulo }}</h3>
@@ -149,7 +149,7 @@
                   } @else {
                     <div class="text-center py-12">
                       <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-gray-100 mb-4">
-                        <span class="i-tabler-article text-2xl text-gray-400"></span>
+                        <app-icon name="article" class="text-2xl text-gray-400" />
                       </div>
                       <p class="text-gray-500">No hay posts todavía.</p>
                     </div>
@@ -160,7 +160,7 @@
                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                       @for (s of vm.servicios; track s.id) {
                         <div class="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border border-gray-100">
-                          <span class="i-tabler-tag text-xl text-gray-700"></span>
+                          <app-icon name="tag" class="text-xl text-gray-700" />
                           <span class="font-medium text-gray-900">{{ s.nombre }}</span>
                         </div>
                       }
@@ -168,7 +168,7 @@
                   } @else {
                     <div class="text-center py-12">
                       <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-gray-100 mb-4">
-                        <span class="i-tabler-briefcase text-2xl text-gray-400"></span>
+                        <app-icon name="briefcase" class="text-2xl text-gray-400" />
                       </div>
                       <p class="text-gray-500">No hay servicios listados.</p>
                     </div>
@@ -197,7 +197,7 @@
                   } @else {
                     <div class="text-center py-12">
                       <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-gray-100 mb-4">
-                        <span class="i-tabler-star text-2xl text-gray-400"></span>
+                        <app-icon name="star" class="text-2xl text-gray-400" />
                       </div>
                       <p class="text-gray-500 mb-4">Sé el primero en dejar una reseña.</p>
                       <button class="px-6 py-2 bg-gray-900 text-white rounded-full font-semibold hover:bg-gray-800 transition-colors">

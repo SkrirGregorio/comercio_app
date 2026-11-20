@@ -4,11 +4,12 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ErrorAlertComponent } from '../../../../shared/components/error-alert/error-alert.component';
 import { LoadingSpinnerComponent } from '../../../../shared/components/loading-spinner/loading-spinner.component';
+import { IconComponent } from '../../../../shared/components/icon/icon.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, ErrorAlertComponent, LoadingSpinnerComponent],
+  imports: [ReactiveFormsModule, RouterLink, ErrorAlertComponent, LoadingSpinnerComponent, IconComponent],
   templateUrl: './register.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './register.component.css'

@@ -3,11 +3,12 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 import { DOCUMENT } from '@angular/common';
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgOptimizedImage],
+  imports: [RouterLink, RouterLinkActive, NgOptimizedImage, IconComponent],
   changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './header.component.html',
 })

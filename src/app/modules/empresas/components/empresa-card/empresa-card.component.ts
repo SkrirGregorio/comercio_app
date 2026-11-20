@@ -3,11 +3,12 @@ import { DatePipe } from '@angular/common';
 import type { Empresa } from '../../../../core/models/empresa.model';
 import { RouterLink } from '@angular/router';
 import { StarDisplayComponent } from '../../../../shared/components/star-display/star-display.component';
+import { IconComponent } from '../../../../shared/components/icon/icon.component';
 
 @Component({
   selector: 'app-empresa-card',
   standalone: true,
-  imports: [RouterLink, StarDisplayComponent],
+  imports: [RouterLink, StarDisplayComponent, IconComponent],
   templateUrl: './empresa-card.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './empresa-card.component.css'

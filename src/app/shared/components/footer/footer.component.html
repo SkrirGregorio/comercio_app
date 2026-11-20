@@ -27,16 +27,20 @@
       </div>
       <div>
         <h3 class="font-semibold text-gray-900 mb-4">Síguenos</h3>
-        <div class="flex mt-4 space-x-4">
-          <a href="#" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:border-gray-900 hover:text-gray-900 transition-colors">
-            <span class="i-tabler-brand-facebook text-xl"></span>
-          </a>
-          <a href="#" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:border-gray-900 hover:text-gray-900 transition-colors">
-            <span class="i-tabler-brand-instagram text-xl"></span>
-          </a>
-          <a href="#" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:border-gray-900 hover:text-gray-900 transition-colors">
-            <span class="i-tabler-brand-twitter text-xl"></span>
-          </a>
+        <div class="flex mt-4 gap-4">
+          @for (red of redes; track red.nombre) {
+            <a
+              [attr.href]="red.url || '#'"
+              [attr.target]="red.url ? '_blank' : null"
+              rel="noopener noreferrer"
+              (click)="!red.url && $event.preventDefault()"
+              [attr.aria-label]="red.nombre"
+              [title]="red.url ? red.nombre : red.nombre + ' (próximamente)'"
+              class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:border-gray-900 hover:text-gray-900 transition-colors"
+            >
+              <app-icon [name]="red.icono" class="text-xl" />
+            </a>
+          }
         </div>
       </div>
     </div>

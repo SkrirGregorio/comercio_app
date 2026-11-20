@@ -19,7 +19,7 @@
           </label>
           <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <span class="i-tabler-user text-gray-400"></span>
+              <app-icon name="user" class="text-gray-400" />
             </div>
             <input 
               id="nombre"
@@ -31,7 +31,7 @@
           </div>
           @if (form.controls.nombre.touched && form.controls.nombre.invalid) {
             <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
-              <span class="i-tabler-alert-circle text-base"></span>
+              <app-icon name="alert-circle" class="text-base" />
               El nombre es requerido
             </p>
           }
@@ -44,7 +44,7 @@
           </label>
           <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <span class="i-tabler-mail text-gray-400"></span>
+              <app-icon name="mail" class="text-gray-400" />
             </div>
             <input 
               id="email"
@@ -56,7 +56,7 @@
           </div>
           @if (form.controls.email.touched && form.controls.email.invalid) {
             <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
-              <span class="i-tabler-alert-circle text-base"></span>
+              <app-icon name="alert-circle" class="text-base" />
               Por favor ingresa un email válido
             </p>
           }
@@ -69,7 +69,7 @@
           </label>
           <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <span class="i-tabler-lock text-gray-400"></span>
+              <app-icon name="lock" class="text-gray-400" />
             </div>
             <input 
               id="password"
@@ -81,7 +81,7 @@
           </div>
           @if (form.controls.password.touched && form.controls.password.invalid) {
             <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
-              <span class="i-tabler-alert-circle text-base"></span>
+              <app-icon name="alert-circle" class="text-base" />
               La contraseña debe tener al menos 8 caracteres
             </p>
           }
@@ -118,7 +118,7 @@
             <app-loading-spinner label="Creando cuenta..." />
           } @else { 
             <span>Crear cuenta</span>
-            <span class="i-tabler-arrow-right"></span>
+            <app-icon name="arrow-right" />
           }
         </button>
       </form>

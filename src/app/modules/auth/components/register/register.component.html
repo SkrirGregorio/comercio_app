@@ -90,16 +90,23 @@
         <!-- Terms and Conditions -->
         <div class="flex items-start gap-3 pt-2">
           <div class="flex items-center h-6">
-            <input 
-              id="terms" 
-              type="checkbox" 
+            <input
+              id="terms"
+              type="checkbox"
+              formControlName="aceptaTerminos"
               class="h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900"
             >
           </div>
           <label for="terms" class="text-sm text-gray-600">
-            Acepto los <a routerLink="/legal/terminos" class="font-medium text-gray-900 hover:text-gray-700">términos y condiciones</a> y la <a routerLink="/legal/privacidad" class="font-medium text-gray-900 hover:text-gray-700">política de privacidad</a>
+            Declaro ser mayor de 18 años y acepto los
+            <a routerLink="/legal/terminos" target="_blank" rel="noopener" class="font-medium text-gray-900 underline hover:text-gray-700">términos y condiciones</a>
+            y la
+            <a routerLink="/legal/privacidad" target="_blank" rel="noopener" class="font-medium text-gray-900 underline hover:text-gray-700">política de privacidad</a>.
           </label>
         </div>
+        @if (form.controls.aceptaTerminos.touched && form.controls.aceptaTerminos.invalid) {
+          <p class="text-sm text-red-600 -mt-2">Debes aceptar los términos para crear tu cuenta.</p>
+        }
 
         <!-- Submit Button -->
         <button 

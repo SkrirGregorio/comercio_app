@@ -10,7 +10,14 @@ export interface AuthResponse {
 
 export interface LoginDto { email: string; password: string }
 /** El registro público solo permite estos roles; `admin` lo asigna otro administrador. */
-export interface RegisterDto { nombre: string; email: string; password: string; role: Extract<Role, 'propietario' | 'consumidor'> }
+export interface RegisterDto {
+  nombre: string;
+  email: string;
+  password: string;
+  role: Extract<Role, 'propietario' | 'consumidor'>;
+  /** Debe ser true: la API rechaza el registro sin aceptación de términos */
+  aceptaTerminos: boolean;
+}
 export interface UpdateProfileDto { nombre?: string; email?: string; photoUrl?: string }
 
 @Injectable({ providedIn: 'root' })

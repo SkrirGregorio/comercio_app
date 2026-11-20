@@ -25,7 +25,9 @@ export class RegisterComponent {
     nombre: ['', [Validators.required, Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
     role: this.fb.control<'consumidor' | 'propietario'>('consumidor', { nonNullable: true, validators: [Validators.required] }),
-    password: ['', [Validators.required, Validators.minLength(8)]]
+    password: ['', [Validators.required, Validators.minLength(8)]],
+    // Aceptación de términos/privacidad y declaración de mayoría de edad (obligatoria)
+    aceptaTerminos: [false, [Validators.requiredTrue]]
   });
 
   onSubmit() {

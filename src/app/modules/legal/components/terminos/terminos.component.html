@@ -22,179 +22,199 @@
   <div class="container py-12">
     <div class="max-w-3xl mx-auto">
       <div class="bg-white rounded-3xl border border-gray-100 p-8 md:p-12 space-y-10">
-        
-        <!-- 1. Aceptación de Términos -->
+
+        <!-- 1. Aceptación -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Aceptación de Términos</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Aceptación de los Términos</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              Bienvenido a <strong>Comercio Local</strong>, una Aplicación Web Progresiva (PWA) diseñada como directorio centralizado y geolocalizado para facilitar la búsqueda, localización y evaluación de empresas que ofrecen productos y servicios tecnológicos, particularmente reparación y venta de computadoras, en el municipio de Jutiapa.
+              <strong>{{ legal.plataforma }}</strong> es una Aplicación Web Progresiva (PWA) que funciona como directorio geolocalizado de empresas de reparación y venta de computadoras y otros servicios tecnológicos del municipio de Jutiapa, Guatemala. Es un proyecto de egreso desarrollado por {{ legal.responsable }} en la {{ legal.institucion }}.
             </p>
             <p>
-              Al acceder y utilizar esta plataforma, usted acepta estar sujeto a estos Términos y Condiciones. Si no está de acuerdo con alguno de estos términos, por favor no utilice la aplicación.
+              Al usar la plataforma o crear una cuenta, usted acepta estos Términos y Condiciones y la <a routerLink="/legal/privacidad" class="font-medium text-gray-900 underline">Política de Privacidad</a>. Si no está de acuerdo, por favor no la utilice.
             </p>
           </div>
         </section>
 
-        <!-- 2. Descripción del Servicio -->
+        <!-- 2. Servicio -->
         <section>
           <h2 class="text-2xl font-bold text-gray-900 mb-4">2. Descripción del Servicio</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>
-              <strong>Comercio Local</strong> es una plataforma digital que permite:
-            </p>
+            <p>La plataforma permite:</p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>A los <strong>consumidores</strong>: buscar, localizar y evaluar empresas de servicios tecnológicos mediante geolocalización, reseñas y calificaciones.</li>
-              <li>A los <strong>propietarios de negocios</strong>: registrar y gestionar información de sus empresas, publicar contenido (posts), y recibir reseñas de clientes.</li>
-              <li>A los <strong>administradores</strong>: moderar contenido, gestionar usuarios y mantener la calidad del directorio.</li>
+              <li><strong>A cualquier visitante</strong>: consultar el directorio de empresas, sus servicios, publicaciones y reseñas, y verlas en un mapa.</li>
+              <li><strong>A los consumidores registrados</strong>: además, calificar y reseñar empresas.</li>
+              <li><strong>A los propietarios</strong>: registrar y administrar sus empresas, los servicios que ofrecen y sus publicaciones.</li>
             </ul>
             <p>
-              La plataforma no realiza transacciones comerciales directas, sino que actúa como intermediario de información entre consumidores y proveedores.
+              {{ legal.plataforma }} solo ofrece información: no vende productos ni servicios, no procesa pagos y no interviene en los acuerdos entre usuarios y empresas.
+            </p>
+            <p>
+              El servicio es gratuito y se ofrece con fines académicos y de apoyo al comercio local.
             </p>
           </div>
         </section>
 
-        <!-- 3. Registro y Cuentas -->
+        <!-- 3. Cuentas -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">3. Registro y Cuentas de Usuario</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">3. Registro y Cuentas</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>
-              Para acceder a ciertas funcionalidades, los usuarios deben crear una cuenta proporcionando información veraz y actualizada. Existen tres tipos de cuentas:
-            </p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Consumidor</strong>: Puede buscar empresas, dejar reseñas y calificaciones.</li>
-              <li><strong>Propietario</strong>: Puede registrar y gestionar empresas, publicar posts y responder reseñas.</li>
-              <li><strong>Administrador</strong>: Puede moderar contenido y gestionar usuarios.</li>
-            </ul>
-            <p>
-              Usted es responsable de mantener la confidencialidad de su contraseña y de todas las actividades que ocurran bajo su cuenta. Debe notificarnos inmediatamente de cualquier uso no autorizado.
-            </p>
-          </div>
-        </section>
-
-        <!-- 4. Uso Aceptable -->
-        <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Uso Aceptable</h2>
-          <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>Al utilizar nuestra plataforma, usted se compromete a:</p>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>Proporcionar información precisa y actualizada sobre su empresa.</li>
-              <li>No publicar contenido falso, engañoso, difamatorio, obsceno o ilegal.</li>
-              <li>No realizar actividades que puedan dañar, deshabilitar o sobrecargar la plataforma.</li>
-              <li>No utilizar la plataforma para fines comerciales no autorizados (spam, phishing).</li>
-              <li>Respetar los derechos de propiedad intelectual de terceros.</li>
-              <li>No manipular calificaciones o reseñas de manera fraudulenta.</li>
+              <li>Para crear una cuenta debe ser mayor de 18 años y proporcionar información veraz.</li>
+              <li>Al registrarse elige entre cuenta de <strong>consumidor</strong> o de <strong>propietario</strong>. Las cuentas de administrador solo las asigna el equipo de la plataforma.</li>
+              <li>Usted es responsable de mantener su contraseña en secreto y de lo que se haga con su cuenta. Si sospecha un uso no autorizado, avísenos de inmediato.</li>
             </ul>
           </div>
         </section>
 
-        <!-- 5. Contenido del Usuario -->
+        <!-- 4. Propietarios -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Contenido del Usuario</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Obligaciones de los Propietarios</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>
-              Los usuarios pueden publicar contenido como descripciones de empresas, posts, reseñas y fotografías. Al publicar contenido, usted:
-            </p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>Garantiza que tiene los derechos necesarios sobre el contenido.</li>
-              <li>Otorga a <strong>Comercio Local</strong> una licencia no exclusiva, mundial y libre de regalías para usar, reproducir y mostrar su contenido en la plataforma.</li>
-              <li>Es responsable del contenido que publica y de cualquier consecuencia derivada.</li>
-            </ul>
-            <p>
-              Nos reservamos el derecho de eliminar cualquier contenido que consideremos inapropiado o que viole estos términos.
-            </p>
-          </div>
-        </section>
-
-        <!-- 6. Geolocalización -->
-        <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Servicios de Geolocalización</h2>
-          <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>
-              Nuestra plataforma utiliza servicios de geolocalización para mostrar empresas cercanas a los usuarios. Al permitir el acceso a su ubicación:
-            </p>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>Acepta que recopilemos datos de ubicación para mejorar la experiencia de búsqueda.</li>
-              <li>Puede desactivar esta función en cualquier momento desde la configuración de su navegador.</li>
-              <li>La precisión de la geolocalización depende de su dispositivo y conexión.</li>
+              <li>Solo puede registrar empresas que le pertenezcan o que esté autorizado a representar.</li>
+              <li>La información del negocio (dirección, ubicación, horario, teléfono y servicios) debe ser verdadera y mantenerse actualizada.</li>
+              <li>Las publicaciones deben referirse a su negocio y no pueden ser engañosas.</li>
             </ul>
           </div>
         </section>
 
-        <!-- 7. Limitación de Responsabilidad -->
+        <!-- 5. Reseñas -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Limitación de Responsabilidad</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Reseñas y Calificaciones</h2>
+          <div class="space-y-4 text-gray-700 leading-relaxed">
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>Cada usuario puede publicar una sola reseña por empresa, con una calificación de 1 a 5 estrellas, y puede eliminarla cuando quiera.</li>
+              <li>Los propietarios no pueden reseñar sus propias empresas.</li>
+              <li>Las reseñas deben basarse en experiencias reales. Están prohibidas las reseñas falsas, pagadas o escritas para perjudicar a un competidor.</li>
+              <li>Su nombre y su foto de perfil se muestran junto a sus reseñas.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 6. Uso aceptable -->
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Uso Aceptable</h2>
+          <div class="space-y-4 text-gray-700 leading-relaxed">
+            <p>No está permitido:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>Publicar contenido falso, engañoso, difamatorio, ofensivo, discriminatorio o ilegal.</li>
+              <li>Subir imágenes sobre las que no tenga derechos o que muestren a otras personas sin su consentimiento.</li>
+              <li>Enviar spam, hacer phishing o usar la plataforma para fines ajenos a su propósito.</li>
+              <li>Intentar acceder a cuentas o datos ajenos, vulnerar la seguridad o sobrecargar el servicio.</li>
+              <li>Extraer datos de forma masiva o automatizada.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 7. Contenido -->
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Contenido de los Usuarios</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              <strong>Comercio Local</strong> actúa como plataforma de información y no garantiza:
+              Usted conserva la propiedad del contenido que publica (descripciones, publicaciones, reseñas e imágenes) y es responsable de él. Al publicarlo, nos autoriza de forma gratuita y no exclusiva a mostrarlo en la plataforma mientras permanezca publicado.
             </p>
+            <p>
+              Podemos retirar contenido que incumpla estos términos, y suspender o eliminar las cuentas responsables.
+            </p>
+          </div>
+        </section>
+
+        <!-- 8. Mapas -->
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">8. Mapas y Ubicación</h2>
+          <div class="space-y-4 text-gray-700 leading-relaxed">
+            <p>
+              Los mapas los proporciona Google Maps, y su uso también está sujeto a los <a href="https://maps.google.com/help/terms_maps/" target="_blank" rel="noopener noreferrer" class="font-medium text-gray-900 underline">Términos de servicio de Google Maps</a>.
+            </p>
+            <p>
+              La ubicación de cada empresa la indica su propietario; las distancias mostradas son aproximadas. Su ubicación se usa solo en su dispositivo, como se explica en la <a routerLink="/legal/privacidad" class="font-medium text-gray-900 underline">Política de Privacidad</a>.
+            </p>
+          </div>
+        </section>
+
+        <!-- 9. Responsabilidad -->
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">9. Limitación de Responsabilidad</h2>
+          <div class="space-y-4 text-gray-700 leading-relaxed">
+            <p>{{ legal.plataforma }} no garantiza:</p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>La veracidad, exactitud o actualidad de la información publicada por terceros.</li>
-              <li>La calidad de los productos o servicios ofrecidos por las empresas listadas.</li>
-              <li>El resultado de transacciones entre usuarios y empresas.</li>
-              <li>La disponibilidad ininterrumpida de la plataforma.</li>
+              <li>Que la información publicada por las empresas o los usuarios sea exacta o esté actualizada.</li>
+              <li>La calidad, el precio o el resultado de los productos y servicios de las empresas del directorio.</li>
+              <li>Que la plataforma esté disponible de forma ininterrumpida o libre de errores.</li>
             </ul>
             <p>
-              No somos responsables por daños directos, indirectos, incidentales o consecuentes derivados del uso de la plataforma.
+              Cualquier acuerdo, compra o reclamo es exclusivamente entre usted y la empresa correspondiente. En la medida en que lo permita la ley, no seremos responsables de los daños derivados del uso de la plataforma.
             </p>
           </div>
         </section>
 
-        <!-- 8. Propiedad Intelectual -->
+        <!-- 10. Propiedad intelectual -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">8. Propiedad Intelectual</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">10. Propiedad Intelectual</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              Todos los derechos de propiedad intelectual sobre el diseño, código, logotipos y contenido original de la plataforma pertenecen a <strong>Comercio Local</strong>. Queda prohibida la reproducción, distribución o modificación sin autorización expresa.
+              El diseño, el código, el nombre y el logotipo de la plataforma pertenecen a su autor. No pueden reproducirse ni distribuirse sin autorización, salvo para los usos académicos que permita la universidad. Las marcas y logotipos de las empresas del directorio pertenecen a sus respectivos dueños.
             </p>
           </div>
         </section>
 
-        <!-- 9. Modificaciones -->
+        <!-- 11. Terminación -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">9. Modificaciones a los Términos</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">11. Suspensión y Eliminación de Cuentas</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              Nos reservamos el derecho de modificar estos Términos y Condiciones en cualquier momento. Las modificaciones entrarán en vigor inmediatamente después de su publicación. El uso continuado de la plataforma constituye la aceptación de los términos modificados.
+              Podemos suspender o eliminar cuentas que incumplan estos términos. Usted puede pedir la eliminación de su cuenta en cualquier momento escribiéndonos
+              @if (legal.correoContacto) {
+                a <a [href]="'mailto:' + legal.correoContacto" class="font-medium text-gray-900 underline">{{ legal.correoContacto }}</a>
+              }
+              desde el correo con el que se registró; la atenderemos en un plazo máximo de {{ legal.plazoSolicitudesDias }} días. Qué ocurre con sus datos se explica en la <a routerLink="/legal/privacidad" class="font-medium text-gray-900 underline">Política de Privacidad</a>.
             </p>
           </div>
         </section>
 
-        <!-- 10. Terminación -->
+        <!-- 12. Cambios -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">10. Terminación de Cuenta</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">12. Cambios a estos Términos</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              Podemos suspender o terminar su cuenta si viola estos términos, sin previo aviso. Usted puede eliminar su cuenta en cualquier momento desde la configuración de su perfil.
+              Podemos actualizar estos términos. La nueva versión se publicará en esta página con su fecha de actualización y, si los cambios son importantes, lo avisaremos dentro de la plataforma. Si sigue usando la plataforma después de un cambio, se entiende que lo acepta.
             </p>
           </div>
         </section>
 
-        <!-- 11. Ley Aplicable -->
+        <!-- 13. Ley aplicable -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">11. Jurisdicción y Ley Aplicable</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">13. Ley Aplicable</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              Estos términos se rigen por las leyes de la República de Guatemala. Cualquier disputa será resuelta en los tribunales competentes del municipio de Jutiapa, Guatemala.
+              Estos términos se rigen por las leyes de la República de Guatemala. Cualquier controversia se someterá a los tribunales competentes del departamento de Jutiapa, Guatemala.
             </p>
           </div>
         </section>
 
-        <!-- 12. Contacto -->
+        <!-- 14. Contacto -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">12. Contacto</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">14. Contacto</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>
-              Si tiene preguntas sobre estos Términos y Condiciones, puede contactarnos a través de:
-            </p>
-            <ul class="list-none space-y-2">
-              <li class="flex items-center gap-2">
-                <span class="i-tabler-mail text-gray-400"></span>
-                <span>info&#64;comerciolocal.com</span>
+            <ul class="list-none space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="i-tabler-mail text-gray-400 mt-1"></span>
+                <div>
+                  <div class="font-semibold text-gray-900">Correo:</div>
+                  @if (legal.correoContacto) {
+                    <a [href]="'mailto:' + legal.correoContacto" class="underline">{{ legal.correoContacto }}</a>
+                  } @else {
+                    <div class="text-gray-500">Pendiente de publicar</div>
+                  }
+                </div>
               </li>
-              <li class="flex items-center gap-2">
-                <span class="i-tabler-map-pin text-gray-400"></span>
-                <span>Jutiapa, Guatemala</span>
+              <li class="flex items-start gap-3">
+                <span class="i-tabler-map-pin text-gray-400 mt-1"></span>
+                <div>
+                  <div class="font-semibold text-gray-900">Ubicación:</div>
+                  <div>Jutiapa, Guatemala</div>
+                </div>
               </li>
             </ul>
           </div>
@@ -204,14 +224,14 @@
 
       <!-- Action Buttons -->
       <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-        <a 
-          routerLink="/legal/privacidad" 
+        <a
+          routerLink="/legal/privacidad"
           class="px-6 py-3 rounded-xl border border-gray-200 text-gray-900 font-semibold hover:border-gray-900 transition-colors text-center"
         >
           Ver Política de Privacidad
         </a>
-        <a 
-          routerLink="/" 
+        <a
+          routerLink="/"
           class="px-6 py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors text-center"
         >
           Volver al Inicio

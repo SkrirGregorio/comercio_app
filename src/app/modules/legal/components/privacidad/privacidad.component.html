@@ -22,229 +22,229 @@
   <div class="container py-12">
     <div class="max-w-3xl mx-auto">
       <div class="bg-white rounded-3xl border border-gray-100 p-8 md:p-12 space-y-10">
-        
+
         <!-- Introducción -->
         <section>
           <h2 class="text-2xl font-bold text-gray-900 mb-4">Introducción</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              En <strong>Comercio Local</strong>, valoramos y respetamos su privacidad. Esta Política de Privacidad describe cómo recopilamos, usamos, almacenamos y protegemos su información personal cuando utiliza nuestra Aplicación Web Progresiva (PWA).
+              <strong>{{ legal.plataforma }}</strong> es una Aplicación Web Progresiva (PWA) que funciona como directorio geolocalizado de empresas de reparación y venta de computadoras y otros servicios tecnológicos del municipio de Jutiapa, Guatemala.
             </p>
             <p>
-              Nuestro objetivo es facilitar la búsqueda y localización de empresas de servicios tecnológicos en el municipio de Jutiapa, optimizando los procesos de conexión entre consumidores y proveedores, siempre protegiendo sus datos personales.
+              Esta política explica qué datos personales tratamos, para qué, con quién se comparten y qué derechos tiene sobre ellos. Al crear una cuenta, usted declara haberla leído y aceptado.
             </p>
           </div>
         </section>
 
-        <!-- 1. Información que Recopilamos -->
+        <!-- 1. Responsable -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Información que Recopilamos</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Responsable del Tratamiento</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
-            <h3 class="text-xl font-semibold text-gray-900 mt-6">1.1 Información proporcionada por el usuario</h3>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Datos de registro</strong>: Nombre, correo electrónico, contraseña (encriptada), tipo de cuenta (consumidor, propietario, administrador).</li>
-              <li><strong>Información de empresas</strong>: Nombre comercial, descripción, dirección, teléfono, correo electrónico, categorías de servicio, horarios.</li>
-              <li><strong>Contenido generado</strong>: Posts, reseñas, calificaciones, fotografías e imágenes.</li>
-              <li><strong>Información de contacto</strong>: Datos adicionales para comunicación con empresas.</li>
-            </ul>
-
-            <h3 class="text-xl font-semibold text-gray-900 mt-6">1.2 Información recopilada automáticamente</h3>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Datos de geolocalización</strong>: Ubicación aproximada del usuario (con su consentimiento) para mostrar empresas cercanas.</li>
-              <li><strong>Datos de uso</strong>: Páginas visitadas, búsquedas realizadas, interacciones con la plataforma.</li>
-              <li><strong>Información del dispositivo</strong>: Tipo de navegador, sistema operativo, dirección IP, resolución de pantalla.</li>
-              <li><strong>Cookies y tecnologías similares</strong>: Para mejorar la funcionalidad y personalizar la experiencia.</li>
-            </ul>
+            <p>
+              {{ legal.plataforma }} es un proyecto de egreso desarrollado por <strong>{{ legal.responsable }}</strong> en la {{ legal.institucion }}. El responsable de los datos personales es quien desarrolla y opera la plataforma.
+            </p>
           </div>
         </section>
 
-        <!-- 2. Cómo Usamos su Información -->
+        <!-- 2. Información que tratamos -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">2. Cómo Usamos su Información</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">2. Información que Tratamos</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>Utilizamos la información recopilada para:</p>
+            <h3 class="text-xl font-semibold text-gray-900 mt-6">2.1 Datos que usted proporciona</h3>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Proveer el servicio</strong>: Facilitar búsquedas geolocalizadas, mostrar directorios de empresas, gestionar cuentas de usuario.</li>
-              <li><strong>Mejorar la experiencia</strong>: Personalizar resultados de búsqueda, recomendar empresas relevantes.</li>
-              <li><strong>Comunicación</strong>: Enviar notificaciones sobre la cuenta, actualizaciones de la plataforma, respuestas a consultas.</li>
-              <li><strong>Seguridad</strong>: Detectar y prevenir fraudes, abusos o actividades ilegales.</li>
-              <li><strong>Análisis y estadísticas</strong>: Generar métricas de uso para mejorar la plataforma (datos anonimizados).</li>
-              <li><strong>Cumplimiento legal</strong>: Responder a solicitudes legales de autoridades competentes.</li>
+              <li><strong>Cuenta</strong>: nombre, correo electrónico, contraseña y tipo de cuenta (consumidor o propietario). La contraseña nunca se guarda en texto plano: se almacena transformada con un algoritmo de hash irreversible (bcrypt).</li>
+              <li><strong>Foto de perfil</strong>: opcional.</li>
+              <li><strong>Empresas</strong> (propietarios): nombre comercial, descripción, dirección, ubicación en el mapa, teléfono, correo y sitio web del negocio, horario, logotipo, portada y servicios que ofrece.</li>
+              <li><strong>Contenido publicado</strong>: publicaciones (posts) e imágenes de las empresas, y reseñas con su calificación y comentario.</li>
             </ul>
+
+            <h3 class="text-xl font-semibold text-gray-900 mt-6">2.2 Datos que no recopilamos</h3>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>No usamos herramientas de analítica ni de publicidad, y no registramos su historial de navegación ni sus búsquedas.</li>
+              <li>No guardamos su ubicación (ver sección 5).</li>
+              <li>No procesamos pagos ni datos bancarios: la plataforma no realiza ventas.</li>
+            </ul>
+            <p>
+              Como cualquier servicio web, los servidores donde se aloja la plataforma pueden registrar temporalmente datos técnicos de las peticiones (como la dirección IP) con fines de seguridad y funcionamiento.
+            </p>
           </div>
         </section>
 
-        <!-- 3. Base Legal del Tratamiento -->
+        <!-- 3. Finalidades -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">3. Base Legal del Tratamiento</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">3. Para qué Usamos sus Datos</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>El tratamiento de sus datos se fundamenta en:</p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Consentimiento</strong>: Al crear una cuenta y aceptar estos términos.</li>
-              <li><strong>Ejecución del contrato</strong>: Para proveer los servicios solicitados.</li>
-              <li><strong>Interés legítimo</strong>: Mejorar la plataforma y prevenir fraudes.</li>
-              <li><strong>Obligación legal</strong>: Cumplir con requisitos legales aplicables.</li>
+              <li><strong>Gestionar su cuenta</strong>: registro, inicio de sesión y control de permisos según el tipo de cuenta.</li>
+              <li><strong>Mostrar el directorio</strong>: publicar la información de las empresas, sus servicios, publicaciones y reseñas.</li>
+              <li><strong>Seguridad</strong>: proteger las cuentas y prevenir abusos, por ejemplo limitando los intentos de inicio de sesión.</li>
+              <li><strong>Atender solicitudes</strong>: responder consultas y solicitudes sobre sus datos.</li>
             </ul>
+            <p>
+              Tratamos sus datos con base en su consentimiento al registrarse y en la necesidad de hacerlo para prestar el servicio que solicita.
+            </p>
           </div>
         </section>
 
-        <!-- 4. Compartir Información -->
+        <!-- 4. Información pública -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Compartir Información con Terceros</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Información Visible para Otros Usuarios</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p><strong>Comercio Local</strong> no vende ni alquila su información personal a terceros. Podemos compartir información en los siguientes casos:</p>
+            <p>Cualquier visitante, aun sin cuenta, puede ver:</p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Con su consentimiento</strong>: Cuando usted autorice expresamente compartir información.</li>
-              <li><strong>Información pública</strong>: Datos de empresas, reseñas y calificaciones son visibles públicamente.</li>
-              <li><strong>Proveedores de servicios</strong>: Empresas que nos ayudan con hosting, análisis, almacenamiento (bajo acuerdos de confidencialidad).</li>
-              <li><strong>Requerimientos legales</strong>: Cuando sea necesario por ley o para proteger derechos legales.</li>
-              <li><strong>Transferencias empresariales</strong>: En caso de fusión, adquisición o venta de activos.</li>
+              <li>Toda la información de las empresas, incluidos el teléfono y el correo del negocio, y el <strong>nombre de su propietario</strong>.</li>
+              <li>Las publicaciones e imágenes de las empresas.</li>
+              <li>Las reseñas, junto con el <strong>nombre y la foto de perfil</strong> de quien las escribió.</li>
             </ul>
+            <p>
+              El correo electrónico de su cuenta <strong>no</strong> se muestra públicamente. Solo lo ven usted y los administradores de la plataforma.
+            </p>
           </div>
         </section>
 
         <!-- 5. Geolocalización -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Uso de Datos de Geolocalización</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Ubicación</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              Nuestra plataforma solicita acceso a su ubicación para:
+              El mapa de empresas puede pedir acceso a su ubicación para mostrar los negocios cercanos y calcular distancias. Ese cálculo se hace <strong>en su propio dispositivo</strong>: su ubicación no se envía a nuestros servidores ni se guarda.
             </p>
+            <p>
+              El permiso es opcional y puede revocarlo en cualquier momento desde la configuración de su navegador. Sin él, el mapa se centra en Jutiapa y puede seguir buscando empresas manualmente.
+            </p>
+          </div>
+        </section>
+
+        <!-- 6. Terceros -->
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Servicios de Terceros</h2>
+          <div class="space-y-4 text-gray-700 leading-relaxed">
+            <p>No vendemos ni alquilamos sus datos. Para funcionar, la plataforma utiliza estos proveedores:</p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>Mostrar empresas cercanas a su ubicación actual.</li>
-              <li>Calcular distancias y optimizar resultados de búsqueda.</li>
-              <li>Mejorar recomendaciones personalizadas.</li>
+              <li><strong>Google Cloud</strong>: aloja la aplicación, la base de datos y las imágenes subidas.</li>
+              <li><strong>Google Maps Platform</strong>: muestra los mapas y sugiere direcciones al registrar una empresa. Al usar el mapa, su navegador se conecta directamente con Google, que recibe datos técnicos como su dirección IP, la zona del mapa que consulta y el texto que escribe en el buscador de lugares. Google trata esos datos según su propia <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="font-medium text-gray-900 underline">política de privacidad</a>.</li>
+              <li><strong>UI Avatars</strong> (ui-avatars.com): cuando un usuario no tiene foto de perfil, se genera una imagen con sus iniciales; para ello se envía su nombre a ese servicio.</li>
             </ul>
             <p>
-              <strong>Importante:</strong> La geolocalización es opcional. Puede denegar o revocar el permiso en cualquier momento desde la configuración de su navegador. Sin geolocalización, podrá seguir usando la plataforma mediante búsquedas manuales.
+              También podremos revelar información si lo exige una autoridad competente conforme a la ley.
             </p>
           </div>
         </section>
 
-        <!-- 6. Cookies -->
+        <!-- 7. Almacenamiento local -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Cookies y Tecnologías Similares</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Almacenamiento en su Dispositivo</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>Utilizamos cookies para:</p>
+            <p>La plataforma <strong>no usa cookies</strong>. Guarda en el almacenamiento local de su navegador:</p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Cookies esenciales</strong>: Mantener sesión activa, seguridad.</li>
-              <li><strong>Cookies de preferencias</strong>: Recordar idioma, configuraciones.</li>
-              <li><strong>Cookies analíticas</strong>: Entender cómo se usa la plataforma (Google Analytics, anonimizado).</li>
-              <li><strong>Cookies de rendimiento</strong>: Optimizar velocidad y funcionalidad.</li>
+              <li><strong>Su sesión</strong>: un token de acceso que vence a los {{ legal.duracionSesion }} o cuando cierra sesión.</li>
+              <li><strong>Su preferencia de tema</strong> (claro u oscuro).</li>
+              <li><strong>Archivos de la aplicación</strong>: como PWA, guarda una copia de la app para que cargue más rápido.</li>
+            </ul>
+            <p>Puede borrar estos datos en cualquier momento desde la configuración de su navegador.</p>
+          </div>
+        </section>
+
+        <!-- 8. Seguridad -->
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">8. Seguridad</h2>
+          <div class="space-y-4 text-gray-700 leading-relaxed">
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>Comunicaciones cifradas mediante HTTPS.</li>
+              <li>Contraseñas almacenadas con hash bcrypt.</li>
+              <li>Acceso controlado por tokens (JWT) y permisos según el tipo de cuenta.</li>
+              <li>Límite de intentos de inicio de sesión y de registro.</li>
+              <li>Validación de las imágenes subidas.</li>
+              <li>Copias de seguridad automáticas de la base de datos.</li>
             </ul>
             <p>
-              Puede gestionar cookies desde la configuración de su navegador. Deshabilitar cookies puede afectar la funcionalidad de la plataforma.
+              Ningún sistema es completamente seguro. Si detectamos un incidente que afecte sus datos, se lo informaremos.
             </p>
           </div>
         </section>
 
-        <!-- 7. Seguridad de Datos -->
+        <!-- 9. Conservación -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Seguridad de Datos</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">9. Conservación de los Datos</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              Implementamos medidas de seguridad técnicas y organizativas para proteger su información:
+              Conservamos sus datos mientras su cuenta exista. Si solicita eliminarla:
             </p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Encriptación</strong>: Contraseñas hasheadas con bcrypt, conexiones HTTPS.</li>
-              <li><strong>Control de acceso</strong>: Autenticación mediante JWT (JSON Web Tokens).</li>
-              <li><strong>Monitoreo</strong>: Detección de actividades sospechosas.</li>
-              <li><strong>Backups</strong>: Copias de seguridad periódicas de datos.</li>
+              <li>Se borran su cuenta, sus datos personales y, si es propietario, sus empresas con sus publicaciones e imágenes.</li>
+              <li>Sus reseñas pueden conservarse de forma <strong>anónima</strong>, sin su nombre ni su foto, para no alterar la calificación de las empresas.</li>
+              <li>Las copias de seguridad se renuevan periódicamente, por lo que los datos borrados desaparecen de ellas con el tiempo.</li>
             </ul>
-            <p>
-              Sin embargo, ningún sistema es completamente seguro. No podemos garantizar la seguridad absoluta de la información transmitida por Internet.
-            </p>
           </div>
         </section>
 
-        <!-- 8. Retención de Datos -->
+        <!-- 10. Derechos -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">8. Retención de Datos</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">10. Sus Derechos</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>
-              Conservamos su información personal mientras su cuenta esté activa o según sea necesario para:
-            </p>
+            <p>Usted puede:</p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>Proveer servicios solicitados.</li>
-              <li>Cumplir obligaciones legales.</li>
-              <li>Resolver disputas y hacer cumplir acuerdos.</li>
+              <li><strong>Acceder</strong> a sus datos y pedir una copia.</li>
+              <li><strong>Corregirlos</strong>: los propietarios pueden editar la información de sus empresas desde el panel; para corregir los datos de su cuenta, escríbanos.</li>
+              <li><strong>Eliminar</strong> su cuenta y sus datos.</li>
+              <li><strong>Retirar su consentimiento</strong>, lo que implica eliminar su cuenta.</li>
             </ul>
             <p>
-              Si elimina su cuenta, sus datos personales serán eliminados dentro de 90 días, excepto información requerida legalmente.
+              Para ejercer cualquiera de estos derechos, escríbanos desde el correo con el que se registró
+              @if (legal.correoContacto) {
+                a <a [href]="'mailto:' + legal.correoContacto" class="font-medium text-gray-900 underline">{{ legal.correoContacto }}</a>.
+              } @else {
+                al correo de contacto indicado en la sección 14.
+              }
+              Atenderemos su solicitud en un plazo máximo de {{ legal.plazoSolicitudesDias }} días.
             </p>
           </div>
         </section>
 
-        <!-- 9. Derechos del Usuario -->
+        <!-- 11. Menores -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">9. Sus Derechos</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">11. Menores de Edad</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>Usted tiene derecho a:</p>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Acceso</strong>: Solicitar una copia de sus datos personales.</li>
-              <li><strong>Rectificación</strong>: Corregir información inexacta o incompleta.</li>
-              <li><strong>Eliminación</strong>: Solicitar la eliminación de su cuenta y datos ("derecho al olvido").</li>
-              <li><strong>Restricción</strong>: Limitar el procesamiento de sus datos.</li>
-              <li><strong>Portabilidad</strong>: Recibir sus datos en formato estructurado.</li>
-              <li><strong>Oposición</strong>: Oponerse a ciertos usos de sus datos.</li>
-              <li><strong>Revocar consentimiento</strong>: Retirar consentimientos previamente otorgados.</li>
-            </ul>
             <p>
-              Para ejercer estos derechos, contacte a: <strong>privacidad&#64;comerciolocal.com</strong>
+              Para crear una cuenta debe ser mayor de 18 años; al registrarse usted lo declara. Consultar el directorio no requiere cuenta. Si sabemos que un menor se registró, eliminaremos su cuenta.
             </p>
           </div>
         </section>
 
-        <!-- 10. Privacidad de Menores -->
+        <!-- 12. Transferencias -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">10. Privacidad de Menores de Edad</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">12. Ubicación de los Servidores</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              La plataforma está dirigida a personas mayores de 18 años. No recopilamos intencionalmente información de menores de edad. Si detectamos que se ha registrado un menor, eliminaremos su cuenta de inmediato.
+              Los datos se almacenan fuera de Guatemala, en servidores de {{ legal.regionDatos }}. Google Cloud aplica sus propias medidas de seguridad y protección de datos.
             </p>
           </div>
         </section>
 
-        <!-- 11. Transferencias Internacionales -->
+        <!-- 13. Cambios -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">11. Transferencias Internacionales de Datos</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">13. Cambios a esta Política</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              Sus datos pueden ser almacenados en servidores ubicados fuera de Guatemala. En tal caso, garantizamos que los proveedores cumplan con estándares adecuados de protección de datos.
+              Si modificamos esta política, publicaremos la nueva versión en esta página con su fecha de actualización. Si los cambios son importantes, también lo avisaremos dentro de la plataforma.
             </p>
           </div>
         </section>
 
-        <!-- 12. Cambios a la Política -->
+        <!-- 14. Contacto -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">12. Cambios a esta Política</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">14. Contacto</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>
-              Podemos actualizar esta Política de Privacidad periódicamente. Los cambios significativos serán notificados mediante correo electrónico o avisos en la plataforma. Le recomendamos revisar esta política regularmente.
-            </p>
-          </div>
-        </section>
-
-        <!-- 13. Contacto -->
-        <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">13. Contacto</h2>
-          <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>
-              Si tiene preguntas, inquietudes o desea ejercer sus derechos respecto a sus datos personales, puede contactarnos:
-            </p>
-            <ul class="list-none space-y-3 mt-4">
+            <ul class="list-none space-y-3">
               <li class="flex items-start gap-3">
                 <span class="i-tabler-mail text-gray-400 mt-1"></span>
                 <div>
-                  <div class="font-semibold text-gray-900">Email de Privacidad:</div>
-                  <div>privacidad&#64;comerciolocal.com</div>
-                </div>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="i-tabler-mail text-gray-400 mt-1"></span>
-                <div>
-                  <div class="font-semibold text-gray-900">Email General:</div>
-                  <div>info&#64;comerciolocal.com</div>
+                  <div class="font-semibold text-gray-900">Correo:</div>
+                  @if (legal.correoContacto) {
+                    <a [href]="'mailto:' + legal.correoContacto" class="underline">{{ legal.correoContacto }}</a>
+                  } @else {
+                    <div class="text-gray-500">Pendiente de publicar</div>
+                  }
                 </div>
               </li>
               <li class="flex items-start gap-3">
@@ -258,12 +258,12 @@
           </div>
         </section>
 
-        <!-- 14. Marco Legal -->
+        <!-- 15. Marco legal -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">14. Marco Legal Aplicable</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">15. Marco Legal</h2>
           <div class="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              Esta política se rige por las leyes de protección de datos personales vigentes en la República de Guatemala y regulaciones internacionales aplicables.
+              Esta política se interpreta conforme a las leyes de la República de Guatemala. Como el país aún no cuenta con una ley general de protección de datos personales, {{ legal.plataforma }} adopta voluntariamente los principios reconocidos internacionalmente de transparencia, finalidad, minimización y seguridad de los datos.
             </p>
           </div>
         </section>
@@ -272,14 +272,14 @@
 
       <!-- Action Buttons -->
       <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-        <a 
-          routerLink="/legal/terminos" 
+        <a
+          routerLink="/legal/terminos"
           class="px-6 py-3 rounded-xl border border-gray-200 text-gray-900 font-semibold hover:border-gray-900 transition-colors text-center"
         >
           Ver Términos y Condiciones
         </a>
-        <a 
-          routerLink="/" 
+        <a
+          routerLink="/"
           class="px-6 py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors text-center"
         >
           Volver al Inicio

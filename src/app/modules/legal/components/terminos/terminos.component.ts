@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { LEGAL } from '../../../../core/config/legal.config';
 
 @Component({
   selector: 'app-terminos',
@@ -11,5 +12,6 @@ import { RouterLink } from '@angular/router';
   styleUrl: './terminos.component.css'
 })
 export class TerminosComponent {
-  lastUpdate = new Date('2025-11-04');
+  readonly legal = LEGAL;
+  readonly lastUpdate = LEGAL.ultimaActualizacion;
 }

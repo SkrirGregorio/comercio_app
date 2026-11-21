@@ -13,6 +13,13 @@ export interface Post {
   empresa?: Empresa;
 }
 
+/** Página del feed público (GET /posts/feed) */
+export interface PostsFeed {
+  items: Post[];
+  /** Cursor para la siguiente página; null cuando no hay más posts */
+  nextCursor: number | null;
+}
+
 export interface CreatePostDto {
   titulo: string;
   contenido: string;

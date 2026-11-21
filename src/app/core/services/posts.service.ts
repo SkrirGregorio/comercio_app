@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Post, CreatePostDto, UpdatePostDto } from '../models/post.model';
+import { Post, CreatePostDto, UpdatePostDto, PostsFeed } from '../models/post.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,16 @@ export class PostsService {
    */
   list(): Observable<Post[]> {
     return this.http.get<Post[]>(this.apiUrl);
+  }
+
+  /**
+   * Feed público paginado por cursor (más recientes primero).
+   * Para la siguiente página se envía el `nextCursor` de la respuesta anterior.
+   */
+  feed(limit = 10, cursor?: number | null): Observable<PostsFeed> {
+    let params = new HttpParams().set('limit', limit);
+    if (cursor) params = params.set('cursor', cursor);
+    return this.http.get<PostsFeed>(`${this.apiUrl}/feed`, { params });
   }
 
   /**

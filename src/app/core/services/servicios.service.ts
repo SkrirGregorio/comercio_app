@@ -19,6 +19,13 @@ export class ServiciosService {
   }
 
   /**
+   * Catálogo público: cada servicio con las empresas que lo ofrecen
+   */
+  catalogo(): Observable<Servicio[]> {
+    return this.http.get<Servicio[]>(`${this.apiUrl}/catalogo`);
+  }
+
+  /**
    * Obtener servicios de una empresa específica
    */
   getByEmpresa(empresaId: number): Observable<Servicio[]> {

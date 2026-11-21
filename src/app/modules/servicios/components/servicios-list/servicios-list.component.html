@@ -1,2 +1,112 @@
-<h1 class="text-2xl font-semibold mb-4">Servicios</h1>
-<p class="text-gray-600">Próximamente: grid y búsqueda de servicios.</p>
+<div class="bg-gray-50 min-h-screen">
+  <div class="container mx-auto px-4 py-12 sm:py-16">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-10">
+        <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-3">Servicios</h1>
+        <p class="text-lg sm:text-xl text-gray-600">Encuentra qué negocios de la zona ofrecen lo que necesitas.</p>
+      </div>
+
+      <!-- Buscador -->
+      <div class="max-w-2xl mx-auto mb-10">
+        <label for="buscar-servicio" class="sr-only">Buscar servicio</label>
+        <div class="relative">
+          <app-icon name="search" class="absolute left-5 top-1/2 -translate-y-1/2 text-xl text-gray-400 pointer-events-none" />
+          <input
+            id="buscar-servicio"
+            type="search"
+            [value]="busqueda()"
+            (input)="onBuscar($event)"
+            placeholder="Buscar servicio o empresa (ej: redes, impresiones)…"
+            autocomplete="off"
+            class="w-full appearance-none [&::-webkit-search-cancel-button]:appearance-none rounded-full border border-gray-200 bg-white py-4 pl-14 pr-12 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+          />
+          @if (busqueda()) {
+            <button type="button" (click)="busqueda.set('')" aria-label="Limpiar búsqueda"
+              class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-700">
+              <app-icon name="x" class="text-lg" />
+            </button>
+          }
+        </div>
+        @if (!cargando() && !error()) {
+          <p class="mt-3 text-center text-sm text-gray-500" aria-live="polite">
+            @if (busqueda()) {
+              {{ filtrados().length }} de {{ servicios().length }} servicios
+            } @else {
+              {{ servicios().length }} servicios ofrecidos por {{ totalEmpresas() }} empresas
+            }
+          </p>
+        }
+      </div>
+
+      @if (cargando()) {
+        <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+            <div class="bg-white rounded-2xl border border-gray-100 p-6 animate-pulse">
+              <div class="h-10 w-10 rounded-xl bg-gray-200 mb-4"></div>
+              <div class="h-5 bg-gray-200 rounded w-2/3 mb-3"></div>
+              <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
+              <div class="h-4 bg-gray-200 rounded w-4/5 mb-6"></div>
+              <div class="h-8 bg-gray-100 rounded-full w-1/2"></div>
+            </div>
+          }
+        </div>
+      } @else if (error()) {
+        <div class="text-center py-16">
+          <p class="text-gray-600 mb-4">No se pudieron cargar los servicios.</p>
+          <button type="button" (click)="cargar()" class="bg-gray-900 text-white font-semibold px-6 py-2.5 rounded-full hover:bg-gray-800 transition-colors">
+            Reintentar
+          </button>
+        </div>
+      } @else if (filtrados().length === 0) {
+        <div class="text-center py-16">
+          <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-gray-100 mb-4">
+            <app-icon name="search" class="text-2xl text-gray-400" />
+          </div>
+          <p class="text-gray-600">
+            @if (busqueda()) {
+              No encontramos servicios para «{{ busqueda() }}».
+            } @else {
+              Aún no hay servicios registrados.
+            }
+          </p>
+        </div>
+      } @else {
+        <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          @for (s of filtrados(); track s.id) {
+            <article class="flex flex-col bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg transition-shadow duration-300">
+              <div class="flex items-start gap-4 mb-3">
+                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gray-900 text-white">
+                  <app-icon name="tag" class="text-xl" />
+                </div>
+                <div class="min-w-0">
+                  <h2 class="text-lg font-bold text-gray-900 leading-snug">{{ s.nombre }}</h2>
+                  <p class="text-xs font-medium text-gray-500 mt-0.5">
+                    {{ s.empresas?.length }} {{ s.empresas?.length === 1 ? 'empresa' : 'empresas' }}
+                  </p>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 leading-relaxed mb-5 line-clamp-3">
+                {{ s.descripcion || 'Sin descripción.' }}
+              </p>
+
+              <div class="mt-auto pt-4 border-t border-gray-100">
+                <p class="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-3">Lo ofrecen</p>
+                <ul class="flex flex-wrap gap-2">
+                  @for (e of s.empresas; track e.id) {
+                    <li>
+                      <a [routerLink]="['/empresas', e.id]"
+                        class="group inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 py-1 pl-1 pr-3 text-sm font-medium text-gray-700 hover:border-gray-900 hover:bg-white hover:text-gray-900 transition-colors">
+                        <img [src]="avatar(e.nombre, e.urlAvatar)" alt="" class="h-6 w-6 rounded-full object-cover" loading="lazy" />
+                        {{ e.nombre }}
+                      </a>
+                    </li>
+                  }
+                </ul>
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

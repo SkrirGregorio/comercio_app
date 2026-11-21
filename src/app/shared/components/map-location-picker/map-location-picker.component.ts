@@ -138,12 +138,14 @@ export class MapLocationPickerComponent implements AfterViewInit, OnDestroy {
     // Centro por defecto: Jutiapa, Guatemala
     let center = { lat: 14.291667, lng: -89.895556 };
 
-    // Si hay coordenadas iniciales, usarlas
-    if (this.initialLat !== null && this.initialLng !== null) {
-      center = { lat: this.initialLat, lng: this.initialLng };
-      this.selectedLat.set(this.initialLat);
-      this.selectedLng.set(this.initialLng);
-      console.log('📍 Using initial coordinates:', center);
+    // Si hay coordenadas iniciales válidas, usarlas. Se convierten con Number() porque
+    // pueden llegar como texto ('14.29502000') y Google Maps exige números.
+    const lat = Number(this.initialLat);
+    const lng = Number(this.initialLng);
+    if (this.initialLat !== null && this.initialLng !== null && Number.isFinite(lat) && Number.isFinite(lng)) {
+      center = { lat, lng };
+      this.selectedLat.set(lat);
+      this.selectedLng.set(lng);
     }
 
     // Crear mapa
